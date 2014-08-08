@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tmw_desert_spacing" tilewidth="32" tileheight="32" spacing="1" margin="1">
+  <tileoffset x="1" y="1"/>
+  <image source="tmw_desert_spacing.png" width="265" height="199"/>
+ </tileset>
+ <tileset firstgid="49" name="meta_tiles" tilewidth="32" tileheight="32" spacing="1" margin="1">
+  <tileoffset x="1" y="1"/>
+  <image source="meta_tiles.png" width="67" height="34"/>
+  <tile id="0">
+   <properties>
+    <property name="collidable" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="Sand" value="True"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="51" name="Level" tilewidth="32" tileheight="32">
+  <image source="Level.png" width="160" height="256"/>
+  <tile id="0">
+   <properties>
+    <property name="Level" value="1"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="Level" value="2"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="Level" value="3"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="Level" value="4"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="Level" value="5"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="Level" value="6"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="Level" value="7"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="Level" value="8"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="Level" value="9"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="Levle" value="10"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="Level" value="11"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="Level" value="12"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="Level" value="13"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="Level" value="14"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="Level" value="15"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="Level" value="16"/>
+   </properties>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="Level" value="17"/>
+   </properties>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="Level" value="18"/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="Level" value="19"/>
+   </properties>
+  </tile>
+  <tile id="19">
+   <properties>
+    <property name="Level" value="20"/>
+   </properties>
+  </tile>
+  <tile id="20">
+   <properties>
+    <property name="Level" value="21"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="Level" value="22"/>
+   </properties>
+  </tile>
+  <tile id="22">
+   <properties>
+    <property name="Level" value="23"/>
+   </properties>
+  </tile>
+  <tile id="23">
+   <properties>
+    <property name="Level" value="24"/>
+   </properties>
+  </tile>
+  <tile id="24">
+   <properties>
+    <property name="Level" value="25"/>
+   </properties>
+  </tile>
+  <tile id="25">
+   <properties>
+    <property name="Level" value="26"/>
+   </properties>
+  </tile>
+  <tile id="26">
+   <properties>
+    <property name="Level" value="27"/>
+   </properties>
+  </tile>
+  <tile id="27">
+   <properties>
+    <property name="Level" value="28"/>
+   </properties>
+  </tile>
+  <tile id="28">
+   <properties>
+    <property name="Level" value="29"/>
+   </properties>
+  </tile>
+  <tile id="29">
+   <properties>
+    <property name="Level" value="30"/>
+   </properties>
+  </tile>
+  <tile id="30">
+   <properties>
+    <property name="Level" value="31"/>
+   </properties>
+  </tile>
+  <tile id="31">
+   <properties>
+    <property name="Level" value="32"/>
+   </properties>
+  </tile>
+  <tile id="32">
+   <properties>
+    <property name="Level" value="33"/>
+   </properties>
+  </tile>
+  <tile id="33">
+   <properties>
+    <property name="Level" value="34"/>
+   </properties>
+  </tile>
+  <tile id="34">
+   <properties>
+    <property name="Level" value="35"/>
+   </properties>
+  </tile>
+  <tile id="35">
+   <properties>
+    <property name="Level" value="36"/>
+   </properties>
+  </tile>
+  <tile id="36">
+   <properties>
+    <property name="Level" value="37"/>
+   </properties>
+  </tile>
+  <tile id="37">
+   <properties>
+    <property name="Level" value="38"/>
+   </properties>
+  </tile>
+  <tile id="38">
+   <properties>
+    <property name="Level" value="39"/>
+   </properties>
+  </tile>
+  <tile id="39">
+   <properties>
+    <property name="Level" value="40"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="BackGroud" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwwEJAAAMBKFL8v1jLsdAwVVTVVVVVVVVVVXV5w/MMyUI
+  </data>
+ </layer>
+ <layer name="Wall" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt07sKgDAQRNGolaTy1SmktPL/P89NIUh0IT6IRO6BaURhFhljAAAAAAD4n0JSKqk+7HVVLeklbZBBYnfvLcF3c5J28fwd9uR5I+kSd3lCuyM32h1+NzH7cK+2uc/fMZrjxieT13/yOwg3vkXbh0vSDAAAAAAAAMjPCrrgAnU=
+  </data>
+ </layer>
+ <layer name="Meta" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt07ENACAIBEBWcv/l7DVGExvQu4SS4p8QAQAAAO9pm6niNEf2TKveq96jutt7ZOngtz8fdwAAAACAWQf3Pgie
+  </data>
+ </layer>
+ <layer name="Level" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1LsNgEAQQ8Ht6fhD/3WRn0yMtBpLr4BJPKpqTC2hNbSF9tAROkNX6A6lzQYODg4ODg4ODg4ODg4Oji6O5yMODo4+ji5/xcHBwcHBwcHBwcHBwcHBwcHB8bfjBeB05Fc=
+  </data>
+ </layer>
+</map>
