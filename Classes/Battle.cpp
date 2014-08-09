@@ -11,6 +11,7 @@
 #include "CCShake.h"
 #include "DamageNumber.h"
 #include "LevelUpEffect.h"
+#include "Status.h"
 
 Battle* Battle::createWithData(UserData *ud){
     Battle* pRet=new Battle();
@@ -59,7 +60,7 @@ void Battle::setupViewsWithData(UserData *ud){
     player->setPosition(ccp(blackbg->getContentSize().width/2,blackbg->getContentSize().height/4));
     
     pHP=userdata->getHP();
-    //添加player血条,稍后添加
+    //添加player血条
     CCSprite* pHPBarbg=CCSprite::create("BarBox.png");
     pHPBarbg->setAnchorPoint(ccp(0.5, 0.5));
     pHPBarbg->setPosition(ccp(blackbg->getContentSize().width/2,blackbg->getContentSize().height/4-50));
@@ -101,15 +102,13 @@ void Battle::setupViewsWithData(UserData *ud){
     blackbg->addChild(mHPBar,1,22);
     
     //修改触屏分发
-    CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, INT_MIN, true);
+    CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
     //加载攻击特效
     AttackEffect::atkeffect()->preload();
     //设置战斗状态标志
     isinbattle=false;
     isbattlepaused=true;
-    isbattleover=false;
-    //设置随机数种子 在Gaming设置过了
-    //setRandomSeed();
+
     
     startlabel=CCLabelBMFont::create("Click To Start.", "myfont1.fnt");
     startlabel->setPosition(ccp(blackbg->getContentSize().width/2,blackbg->getContentSize().height/2));
@@ -120,7 +119,7 @@ bool Battle::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent){
     CCLog("touch");
     //进入界面，点击开始战斗
     
-    if (isinbattle==false&&isbattlepaused==true&&isbattleover==false) {
+    if (isinbattle==false&&isbattlepaused==true) {
         CCLog("进入战斗界面,点击开始战斗");
         blackbg->removeChildByTag(41,true);
         isinbattle=true;
@@ -136,7 +135,7 @@ bool Battle::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent){
     }
     
     //战斗中，点击暂停
-    else if (isinbattle==true&&isbattlepaused==false&&isbattleover==false) {
+    else if (isinbattle==true&&isbattlepaused==false) {
         CCLog("战斗中，点击暂停");
         pauselabel=CCLabelBMFont::create("PAUSED!", "myfont1.fnt");
         pauselabel->setPosition(ccp(blackbg->getContentSize().width/2,blackbg->getContentSize().height/2));
@@ -149,29 +148,29 @@ bool Battle::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent){
     
     
     //战斗中，暂停中，点击恢复
-    else if (isinbattle==true&&isbattlepaused==true&&isbattleover==false) {
+    else if (isinbattle==true&&isbattlepaused==true) {
         CCLog("战斗中，暂停中，点击恢复");
         blackbg->removeChildByTag(42,true);
         player->resumeSchedulerAndActions();
         monster->resumeSchedulerAndActions();
         isbattlepaused=false;
     }
-    
-    //结束画面，点击退出
-    else if (isinbattle==false&&isbattlepaused==false&&isbattleover==true) {
-        CCLog("结束画面,点击退出");
-        
-        const char*  battlelayerexited="BattleLayerExited";
-        CCNotificationCenter::sharedNotificationCenter()->postNotification(battlelayerexited);
-        
-        //退出画面
-    }
+    //改为点击按钮退出
+//    //结束画面，点击退出
+//    else if (isinbattle==false&&isbattlepaused==false) {
+//        CCLog("结束画面,点击退出");
+//        
+//        const char*  battlelayerexited="BattleLayerExited";
+//        CCNotificationCenter::sharedNotificationCenter()->postNotification(battlelayerexited);
+//        
+//        //退出画面
+//    }
     
     return true;
 }
 
 void Battle::onExit(){
-    userdata->SaveUserData();
+//    userdata->SaveUserData();
     CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
     CCLog("battle layer exited");
     CCLayer::onExit();
@@ -385,7 +384,6 @@ void Battle::finalview(bool isPlayerWins){
         playerwinlabel->setPosition(ccp(blackbg->getContentSize().width/2,blackbg->getContentSize().height/4*3));
         blackbg->addChild(playerwinlabel);
         player->setRotation(-90);
-        isbattleover=true;
     }
 }
 
@@ -426,11 +424,32 @@ void Battle::EXPBarcallbackLv(cocos2d::CCNode *pSender){
     EXPnow+=EXPadd;
     EXPadd=0;
     userdata->setEXP(EXPnow);
-    CCLabelBMFont* clicktoexit=CCLabelBMFont::create("Click To Exit.", "myfont1.fnt");
-    clicktoexit->setPosition(ccp(blackbg->getContentSize().width/2,50));
-    blackbg->addChild(clicktoexit);
-    isbattleover=true;
+    CCLabelBMFont* labelmap=CCLabelBMFont::create("MAP", "myfont1.fnt");
+    CCLabelBMFont* labelstatus=CCLabelBMFont::create("STATUS", "myfont1.fnt");
+    CCMenuItemLabel* clicktomap=CCMenuItemLabel::create(labelmap, this, menu_selector(Battle::menucallback));
+    CCMenuItemLabel* clicktostatus=CCMenuItemLabel::create(labelstatus, this, menu_selector(Battle::menucallback));
+    
+    CCMenu* menu=CCMenu::create();
+    menu->addChild(clicktomap,50,41);
+    menu->addChild(clicktostatus,50,42);
+    
+    menu->alignItemsHorizontallyWithPadding(50);
+    
+    menu->setPosition(ccp(blackbg->getContentSize().width/2,50));
+    blackbg->addChild(menu);
 }
+
+void Battle::menucallback(cocos2d::CCObject *pSender){
+    userdata->SaveUserData();
+    int tag=((CCMenuItemLabel*)pSender)->getTag();
+    if (tag==42) {
+        CCDirector::sharedDirector()->pushScene(Status::scene());
+    }
+    CCLog("退出BattleLayer");
+    const char*  battlelayerexited="BattleLayerExited";
+    CCNotificationCenter::sharedNotificationCenter()->postNotification(battlelayerexited);
+}
+
 
 void Battle::ExitNotify(){
     const char*  battlelayerexited="BattleLayerExited";

@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "cocos2d.h"
+#include "UserData.h"
 
 USING_NS_CC;
 
@@ -19,11 +20,13 @@ public:
     virtual bool init();
     static CCScene* scene();
     CREATE_FUNC(Status);
+    virtual void draw();
     
 private:
+    UserData* ud;
     CCSize getWinsize();
     void setupViews();
-
+    virtual void onEnter();
 };
 
 #endif /* defined(__MyRPG__Status__) */

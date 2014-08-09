@@ -25,6 +25,7 @@ public:
     
     virtual void onExit();
     static void setRandomSeed();
+    static const char* IntToChar(int num);
 private:
     CCSprite* blackbg;
     MonsterManager* mm;
@@ -39,7 +40,7 @@ private:
     
     bool isinbattle;
     bool isbattlepaused;
-    bool isbattleover;
+//    bool isbattleover;
     int maxCombo_player;
     int comboNO_player;
     int maxCombo_monster;
@@ -75,7 +76,9 @@ private:
     
     void ExitNotify();
     
-    const char* IntToChar(int num);
+
+    
+    void menucallback(CCObject* pSender);
     
     
 };
