@@ -160,7 +160,7 @@ void SelectHero::radiomenucallback(cocos2d::CCObject *pSender){
     
 }
 
-CCPoint SelectHero::nextLabelPosition(cocos2d::CCLabelBMFont *preLabel, bool vertical, int padding){
+CCPoint SelectHero::nextLabelPosition(cocos2d::CCNode *preLabel, bool vertical, int padding){
     CCPoint position;
     if (vertical) {
         position=ccpAdd(preLabel->getPosition(), ccp(0, preLabel->getContentSize().height+padding));

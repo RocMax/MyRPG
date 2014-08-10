@@ -5,34 +5,46 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>5BAF53CB-4DBE-4497-80A5-AC6BCB5476BC</string>
+	<string>745CFDC1-B153-436C-AB36-3880FF0A1B00</string>
 	<key>IDESourceControlProjectName</key>
 	<string>MyRPG</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>107F96C9-FC5F-456C-8A0F-3840EA0F302A</key>
-		<string>https://github.com/RocMax/projects.git</string>
+		<key>5C35670B-9ECA-4D97-BFDE-757862B99DCF</key>
+		<string>https://github.com/RocMax/MyRPG.git</string>
+		<key>ED0B0317-94AC-4FE9-B46B-5A7787484CFD</key>
+		<string>https://github.com/RocMax/MyRPG.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>MyRPG/proj.ios/MyRPG.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>107F96C9-FC5F-456C-8A0F-3840EA0F302A</key>
+		<key>5C35670B-9ECA-4D97-BFDE-757862B99DCF</key>
 		<string>../../../..</string>
+		<key>ED0B0317-94AC-4FE9-B46B-5A7787484CFD</key>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/RocMax/projects.git</string>
+	<string>https://github.com/RocMax/MyRPG.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>107F96C9-FC5F-456C-8A0F-3840EA0F302A</string>
+	<string>5C35670B-9ECA-4D97-BFDE-757862B99DCF</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>107F96C9-FC5F-456C-8A0F-3840EA0F302A</string>
+			<string>ED0B0317-94AC-4FE9-B46B-5A7787484CFD</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MyRPG</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5C35670B-9ECA-4D97-BFDE-757862B99DCF</string>
 			<key>IDESourceControlWCCName</key>
 			<string>projects</string>
 		</dict>

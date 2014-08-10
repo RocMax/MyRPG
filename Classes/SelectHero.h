@@ -35,11 +35,13 @@ public:
     
     int choice;
     
+    static CCPoint nextLabelPosition(CCNode* preLabel,bool vertical,int padding);
+    
 private:
     void SetupViews();
     void radiomenucallback(CCObject* pSender);
     virtual void draw();
-    CCPoint nextLabelPosition(CCLabelBMFont* preLabel,bool vertical,int padding);
+    
     
     const char* addchar(const char* a,char* b);
     

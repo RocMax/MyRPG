@@ -282,6 +282,8 @@
 		E8B5B7F21961519B00612BCC /* CCRadioMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E8B5B7F01961519B00612BCC /* CCRadioMenu.cpp */; };
 		E8B5B7FE19625CED00612BCC /* myfont1.fnt in Resources */ = {isa = PBXBuildFile; fileRef = E8B5B7FC19625CED00612BCC /* myfont1.fnt */; };
 		E8B5B7FF19625CED00612BCC /* myfont1.png in Resources */ = {isa = PBXBuildFile; fileRef = E8B5B7FD19625CED00612BCC /* myfont1.png */; };
+		E8D8BB3E1995FA4C00C3E64A /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = E8D8BB3C1995FA4C00C3E64A /* add.png */; };
+		E8D8BB3F1995FA4C00C3E64A /* sub.png in Resources */ = {isa = PBXBuildFile; fileRef = E8D8BB3D1995FA4C00C3E64A /* sub.png */; };
 		E8EEC090195BDC680089D564 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = E8EEC08E195BDC680089D564 /* menu.png */; };
 		E8EEC091195BDC680089D564 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = E8EEC08F195BDC680089D564 /* pause.png */; };
 		E8F395EB197AA0DA00D90836 /* Battle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E8F395E9197AA0DA00D90836 /* Battle.cpp */; };
@@ -836,6 +838,8 @@
 		E8B5B7F11961519B00612BCC /* CCRadioMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCRadioMenu.h; path = ../Classes/CCRadioMenu.h; sourceTree = "<group>"; };
 		E8B5B7FC19625CED00612BCC /* myfont1.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = myfont1.fnt; sourceTree = "<group>"; };
 		E8B5B7FD19625CED00612BCC /* myfont1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myfont1.png; sourceTree = "<group>"; };
+		E8D8BB3C1995FA4C00C3E64A /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
+		E8D8BB3D1995FA4C00C3E64A /* sub.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sub.png; sourceTree = "<group>"; };
 		E8EEC08E195BDC680089D564 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
 		E8EEC08F195BDC680089D564 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
 		E8F395E9197AA0DA00D90836 /* Battle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Battle.cpp; path = ../Classes/Battle.cpp; sourceTree = "<group>"; };
@@ -1826,6 +1830,8 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E8D8BB3C1995FA4C00C3E64A /* add.png */,
+				E8D8BB3D1995FA4C00C3E64A /* sub.png */,
 				E89FBF41198FA96100DC4D5E /* LevelUP.png */,
 				E89FBF3F198F769300DC4D5E /* BarBox.png */,
 				E89FBF39198E6D3C00DC4D5E /* EXPbar.png */,
@@ -1913,9 +1919,9 @@
 			isa = PBXGroup;
 			children = (
 				E8126AE019610CD500FECCD0 /* SelectHero.cpp */,
-				E8126AE119610CD500FECCD0 /* SelectHero.h */,
 				E87D367D1966F2B8000C453C /* Gaming.cpp */,
 				E87D367E1966F2B8000C453C /* Gaming.h */,
+				E8126AE119610CD500FECCD0 /* SelectHero.h */,
 				E8F395E9197AA0DA00D90836 /* Battle.cpp */,
 				E8F395EA197AA0DA00D90836 /* Battle.h */,
 				E88DD3EB1982019A000F601F /* Start.cpp */,
@@ -2044,6 +2050,7 @@
 				E8B5B7ED196150E300612BCC /* lizardman_gray.png in Resources */,
 				E8F39600197CEBFF00D90836 /* Monster3.png in Resources */,
 				E87E93FE1963C34A00E89661 /* tmw_desert_spacing.png in Resources */,
+				E8D8BB3E1995FA4C00C3E64A /* add.png in Resources */,
 				E89F81F3196FB716007417F8 /* Level.png in Resources */,
 				E8126ADC19610BF500FECCD0 /* lizardman.png in Resources */,
 				E88DD3FA19868FAA000F601F /* critical.png in Resources */,
@@ -2061,6 +2068,7 @@
 				E8B5B7EE196150E300612BCC /* manticore_gray.png in Resources */,
 				E8126ADF19610C9C00FECCD0 /* spector.png in Resources */,
 				15A3D9961682F7F9002FB0C5 /* CMakeLists.txt in Resources */,
+				E8D8BB3F1995FA4C00C3E64A /* sub.png in Resources */,
 				E8EEC090195BDC680089D564 /* menu.png in Resources */,
 				E8126ADA19610BF500FECCD0 /* cyclops.png in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
