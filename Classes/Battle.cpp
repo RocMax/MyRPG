@@ -119,11 +119,12 @@ bool Battle::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent){
     CCLog("touch");
     //进入界面，点击开始战斗
     
-    if (isinbattle==false&&isbattlepaused==true) {
+    if (isinbattle==false&&isbattlepaused==true&&isplayerfailed==false) {
         CCLog("进入战斗界面,点击开始战斗");
         blackbg->removeChildByTag(41,true);
         isinbattle=true;
         isbattlepaused=false;
+        isplayerfailed=false;
         maxCombo_player=ComboCheck(userdata->getComboRatio());
         CCLOG("new maxCombo_player=%d",maxCombo_player);
         maxCombo_monster=ComboCheck(mm->getM_ComboRatio());
@@ -135,7 +136,7 @@ bool Battle::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent){
     }
     
     //战斗中，点击暂停
-    else if (isinbattle==true&&isbattlepaused==false) {
+    else if (isinbattle==true&&isbattlepaused==false&&isplayerfailed==false) {
         CCLog("战斗中，点击暂停");
         pauselabel=CCLabelBMFont::create("PAUSED!", "myfont1.fnt");
         pauselabel->setPosition(ccp(blackbg->getContentSize().width/2,blackbg->getContentSize().height/2));
@@ -148,23 +149,22 @@ bool Battle::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent){
     
     
     //战斗中，暂停中，点击恢复
-    else if (isinbattle==true&&isbattlepaused==true) {
+    else if (isinbattle==true&&isbattlepaused==true&&isplayerfailed==false) {
         CCLog("战斗中，暂停中，点击恢复");
         blackbg->removeChildByTag(42,true);
         player->resumeSchedulerAndActions();
         monster->resumeSchedulerAndActions();
         isbattlepaused=false;
     }
-    //改为点击按钮退出
-//    //结束画面，点击退出
-//    else if (isinbattle==false&&isbattlepaused==false) {
-//        CCLog("结束画面,点击退出");
-//        
-//        const char*  battlelayerexited="BattleLayerExited";
-//        CCNotificationCenter::sharedNotificationCenter()->postNotification(battlelayerexited);
-//        
-//        //退出画面
-//    }
+
+    //如果player loos，点击退出
+    else if (isinbattle==false&&isbattlepaused==false&&isplayerfailed==true) {
+        CCLog("结束画面,点击退出");
+        const char*  battlelayerexited="BattleLayerExited";
+        CCNotificationCenter::sharedNotificationCenter()->postNotification(battlelayerexited);
+        
+        //退出画面
+    }
     
     return true;
 }
@@ -278,7 +278,7 @@ void Battle::PlayerAttackCallBack(CCNode* pSender){
         player->stopAllActions();
         //战斗结束
         finalview(true);
-        //isinbattle=false;
+
     }
 }
 void Battle::MonsterAttackCallBack(CCNode* pSender){
@@ -299,7 +299,8 @@ void Battle::MonsterAttackCallBack(CCNode* pSender){
         player->stopAllActions();
         //战斗结束画面
         finalview(false);
-        //isinbattle=false;
+        isinbattle=false;
+        isplayerfailed=true;
     }
 
 }
@@ -383,6 +384,9 @@ void Battle::finalview(bool isPlayerWins){
         CCLabelBMFont* playerwinlabel=CCLabelBMFont::create("YOU LOOSE!", "myfont1.fnt");
         playerwinlabel->setPosition(ccp(blackbg->getContentSize().width/2,blackbg->getContentSize().height/4*3));
         blackbg->addChild(playerwinlabel);
+        CCLabelBMFont* exitlabel=CCLabelBMFont::create("Click to Exit.", "myfont1.fnt");
+        exitlabel->setPosition(ccp(blackbg->getContentSize().width/2,blackbg->getContentSize().height/2));
+        blackbg->addChild(exitlabel,1,43);
         player->setRotation(-90);
     }
 }

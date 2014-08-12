@@ -115,13 +115,13 @@ void  Status::setupViews(){
     //+-按钮tag0-4是增加按钮,tag5-9是减少按钮
     for (int i=0; i!=5; i++) {
         CCSprite* addsprite=CCSprite::create("add.png");
-        addsprite->setPosition(ccp(HPlabel->getPositionX()+150, HPlabel->getPositionY()-i*115));
+        addsprite->setPosition(ccp(statunum1->getPositionX()+150, HPlabel->getPositionY()-i*115));
         this->addChild(addsprite, 1, i);
         buttomarray->addObject(addsprite);
     }
     for (int i=5; i!=10; i++) {
         CCSprite* subsprite=CCSprite::create("sub.png");
-        subsprite->setPosition(ccp(statunum1->getPositionX()+150, HPlabel->getPositionY()-(i-5)*115));
+        subsprite->setPosition(ccp(HPlabel->getPositionX()+150, HPlabel->getPositionY()-(i-5)*115));
         this->addChild(subsprite, 1, i);
         buttomarray->addObject(subsprite);
     }
@@ -132,7 +132,47 @@ void  Status::setupViews(){
     
     this->scheduleUpdate();
     
+    CCLabelBMFont* oklabel=CCLabelBMFont::create("OK", "myfont1.fnt");
+    CCLabelBMFont* canclelabel=CCLabelBMFont::create("Cancle", "myfont1.fnt");
+    CCLabelBMFont* resetlabel=CCLabelBMFont::create("Reset", "myfont1.fnt");
+    
+    CCMenuItemLabel* okmenuitem=CCMenuItemLabel::create(oklabel, this, menu_selector(Status::okmeuncallback));
+    CCMenuItemLabel* canclemenuitem=CCMenuItemLabel::create(canclelabel, this, menu_selector(Status::canclemenucallback));
+    CCMenuItemLabel* resetmenuitem=CCMenuItemLabel::create(resetlabel, this, menu_selector(Status::resetmenucallback));
+    
+    CCMenu* menu=CCMenu::create();
+    menu->addChild(resetmenuitem);
+    menu->addChild(okmenuitem);
+    menu->addChild(canclemenuitem);
+    
+    
+    menu->alignItemsHorizontallyWithPadding(30);
+    menu->setPosition(ccp(getWinsize().width-200, 100));
+    
+    this->addChild(menu);
 
+}
+
+void Status::okmeuncallback(cocos2d::CCNode *pSender){
+    ud->setSparePoint(atoi(sparepoint->getString()));
+    ud->setHP(atof(statunum1->getString()));
+    ud->setATK(atof(statunum2->getString()));
+    ud->setDEF(atof(statunum3->getString()));
+    ud->setAGI(atof(statunum4->getString()));
+    ud->setLUK(atof(statunum5->getString()));
+    ud->SaveUserData();
+    CCDirector::sharedDirector()->popScene();
+}
+void Status::canclemenucallback(cocos2d::CCNode *pSender){
+    CCDirector::sharedDirector()->popScene();
+}
+void Status::resetmenucallback(cocos2d::CCNode *pSender){
+    sparepoint->setString(Battle::IntToChar(sp));
+    statunum1->setString(Battle::IntToChar(HP));
+    statunum2->setString(Battle::IntToChar(ATK));
+    statunum3->setString(Battle::IntToChar(DEF));
+    statunum4->setString(Battle::IntToChar(AGI));
+    statunum5->setString(Battle::IntToChar(LUK));
 }
 
 bool Status::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent){
@@ -141,6 +181,7 @@ bool Status::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent){
         CCSprite* sp=(CCSprite*)buttom;
         if (sp->boundingBox().containsPoint(pTouch->getLocation())) {
             flag=sp->getTag();
+            sp->setScale(1.2f);
             CCLOG("Touch Tag:%d",flag);
         }
     }
@@ -150,6 +191,12 @@ bool Status::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent){
 
 void Status::ccTouchEnded(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent){
     flag=10;
+    CCObject* buttom;
+    CCARRAY_FOREACH(buttomarray, buttom){
+        CCSprite* sp=(CCSprite*)buttom;
+        sp->setScale(1.0f);
+    }
+
 }
 
 void Status::update(float t){
@@ -225,4 +272,11 @@ void Status::labelchange(cocos2d::CCLabelAtlas *label, bool isadd){
         label->setString(Battle::IntToChar(atoi(str)+1));
     }
     else label->setString(Battle::IntToChar(atoi(str)-1));
+}
+
+void Status::onExit(){
+    buttomarray->autorelease();
+    this->unscheduleUpdate();
+    CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
+    CCLOG("Status Layer Exit");
 }

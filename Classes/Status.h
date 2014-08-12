@@ -21,6 +21,7 @@ public:
     static CCScene* scene();
     CREATE_FUNC(Status);
     virtual void draw();
+    virtual void onExit();
     
     virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
     virtual void ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent);
@@ -30,8 +31,7 @@ private:
     CCSize getWinsize();
     void setupViews();
     virtual void onEnter();
-//    void addmeuncallback(CCNode* pSender);
-//    void submenucallback(CCNode* pSender);
+
     int sp;
     int HP;
     int ATK;
@@ -49,6 +49,10 @@ private:
     virtual void update(float t);
     
     void labelchange(CCLabelAtlas* label,bool isadd);
+    
+    void okmeuncallback(CCNode* pSender);
+    void canclemenucallback(CCNode* pSender);
+    void resetmenucallback(CCNode* pSender);
 
 };
 

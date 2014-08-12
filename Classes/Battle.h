@@ -40,7 +40,7 @@ private:
     
     bool isinbattle;
     bool isbattlepaused;
-//    bool isbattleover;
+    bool isplayerfailed;
     int maxCombo_player;
     int comboNO_player;
     int maxCombo_monster;
