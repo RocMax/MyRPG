@@ -178,8 +178,10 @@ const char* SelectHero::addchar(const char *a, char *b){
 }
 
 void SelectHero::onExit(){
+    
     sqlite3_free_table(dbResult);
     CCLOG("table released");
+    CCLayer::onExit();
     
 }
 

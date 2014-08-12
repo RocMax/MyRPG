@@ -2,7 +2,7 @@
 //  Status.h
 //  MyRPG
 //
-//  Created by RocLee on 14-8-5.
+//  Created by RocLee on 14-8-11.
 //
 //
 
@@ -22,14 +22,16 @@ public:
     CREATE_FUNC(Status);
     virtual void draw();
     
+    virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
+    virtual void ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent);
     
 private:
     UserData* ud;
     CCSize getWinsize();
     void setupViews();
     virtual void onEnter();
-    void addmeuncallback(CCNode* pSender);
-    void submenucallback(CCNode* pSender);
+//    void addmeuncallback(CCNode* pSender);
+//    void submenucallback(CCNode* pSender);
     int sp;
     int HP;
     int ATK;
@@ -42,11 +44,11 @@ private:
     CCLabelAtlas* statunum4;
     CCLabelAtlas* statunum5;
     CCLabelAtlas* sparepoint;
+    CCArray* buttomarray;
     int flag;
     virtual void update(float t);
     
     void labelchange(CCLabelAtlas* label,bool isadd);
-    
 
 };
 
