@@ -46,7 +46,7 @@ private:
     CCLabelAtlas* sparepoint;
     CCArray* buttomarray;
     int flag;
-    virtual void update(float t);
+    void buttomupdate(float t);
     
     void labelchange(CCLabelAtlas* label,bool isadd);
     

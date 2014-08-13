@@ -110,7 +110,7 @@ void  Status::setupViews(){
     buttomarray=CCArray::create();
     buttomarray->retain();
     
-    flag=10;
+    flag=10;    //flag0-9对应tag0-9的按钮,10表示没有按下任何按钮
     
     //+-按钮tag0-4是增加按钮,tag5-9是减少按钮
     for (int i=0; i!=5; i++) {
@@ -130,7 +130,7 @@ void  Status::setupViews(){
     //注册触摸
     CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 10, true);
     
-    this->scheduleUpdate();
+    this->schedule(schedule_selector(Status::buttomupdate), 0.1f);
     
     CCLabelBMFont* oklabel=CCLabelBMFont::create("OK", "myfont1.fnt");
     CCLabelBMFont* canclelabel=CCLabelBMFont::create("Cancle", "myfont1.fnt");
@@ -199,7 +199,7 @@ void Status::ccTouchEnded(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent){
 
 }
 
-void Status::update(float t){
+void Status::buttomupdate(float t){
     if (atoi(sparepoint->getString())<=sp&&atoi(sparepoint->getString())>0) {
         switch (flag) {
             case 0:

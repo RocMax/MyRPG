@@ -5,13 +5,11 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>745CFDC1-B153-436C-AB36-3880FF0A1B00</string>
+	<string>EB9E1A56-C06E-4BA4-BA25-E3BD6F85A96F</string>
 	<key>IDESourceControlProjectName</key>
 	<string>MyRPG</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>5C35670B-9ECA-4D97-BFDE-757862B99DCF</key>
-		<string>https://github.com/RocMax/MyRPG.git</string>
 		<key>ED0B0317-94AC-4FE9-B46B-5A7787484CFD</key>
 		<string>https://github.com/RocMax/MyRPG.git</string>
 	</dict>
@@ -19,17 +17,15 @@
 	<string>MyRPG/proj.ios/MyRPG.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>5C35670B-9ECA-4D97-BFDE-757862B99DCF</key>
-		<string>../../../..</string>
 		<key>ED0B0317-94AC-4FE9-B46B-5A7787484CFD</key>
-		<string>../../..</string>
+		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/RocMax/MyRPG.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>5C35670B-9ECA-4D97-BFDE-757862B99DCF</string>
+	<string>ED0B0317-94AC-4FE9-B46B-5A7787484CFD</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -44,9 +40,9 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>5C35670B-9ECA-4D97-BFDE-757862B99DCF</string>
+			<string>ED0B0317-94AC-4FE9-B46B-5A7787484CFD</string>
 			<key>IDESourceControlWCCName</key>
-			<string>projects</string>
+			<string>MyRPG</string>
 		</dict>
 	</array>
 </dict>
