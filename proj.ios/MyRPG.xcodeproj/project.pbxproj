@@ -240,6 +240,7 @@
 		D4EF949C15BD2D8E00D803EB /* Icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EF949B15BD2D8E00D803EB /* Icon-114.png */; };
 		D4EF949E15BD2D9600D803EB /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EF949D15BD2D9600D803EB /* Icon-72.png */; };
 		D4EF94A015BD2D9800D803EB /* Icon-144.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EF949F15BD2D9800D803EB /* Icon-144.png */; };
+		E8050718199C9C6900098D8E /* whitebar.png in Resources */ = {isa = PBXBuildFile; fileRef = E8050717199C9C6900098D8E /* whitebar.png */; };
 		E80FFF1119663FF2001DBCC1 /* UserData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E80FFF0F19663FF2001DBCC1 /* UserData.cpp */; };
 		E8126AC0195F269A00FECCD0 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = E8126ABE195F269A00FECCD0 /* sqlite3.c */; };
 		E8126AC7195F271000FECCD0 /* DBOperations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E8126AC5195F271000FECCD0 /* DBOperations.cpp */; };
@@ -782,6 +783,7 @@
 		D4EF949D15BD2D9600D803EB /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../proj.ios/Icon-72.png"; sourceTree = "<group>"; };
 		D4EF949F15BD2D9800D803EB /* Icon-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-144.png"; path = "../proj.ios/Icon-144.png"; sourceTree = "<group>"; };
 		D4F9F37B12E54555005CA6D2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
+		E8050717199C9C6900098D8E /* whitebar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whitebar.png; sourceTree = "<group>"; };
 		E80FFF0F19663FF2001DBCC1 /* UserData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UserData.cpp; path = ../Classes/UserData.cpp; sourceTree = "<group>"; };
 		E80FFF1019663FF2001DBCC1 /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserData.h; path = ../Classes/UserData.h; sourceTree = "<group>"; };
 		E8126ABE195F269A00FECCD0 /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sqlite3.c; sourceTree = "<group>"; };
@@ -1830,6 +1832,7 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E8050717199C9C6900098D8E /* whitebar.png */,
 				E8D8BB3C1995FA4C00C3E64A /* add.png */,
 				E8D8BB3D1995FA4C00C3E64A /* sub.png */,
 				E89FBF41198FA96100DC4D5E /* LevelUP.png */,
@@ -2055,6 +2058,7 @@
 				E8126ADC19610BF500FECCD0 /* lizardman.png in Resources */,
 				E88DD3FA19868FAA000F601F /* critical.png in Resources */,
 				D4EF949E15BD2D9600D803EB /* Icon-72.png in Resources */,
+				E8050718199C9C6900098D8E /* whitebar.png in Resources */,
 				E87E93F91963C34A00E89661 /* black.png in Resources */,
 				E89FBF40198F769300DC4D5E /* BarBox.png in Resources */,
 				E87E93FB1963C34A00E89661 /* edge.png in Resources */,

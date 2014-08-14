@@ -204,6 +204,7 @@ void SelectHero::okmenucallback(cocos2d::CCObject *pSender){
         USER_DEFAULT->setIntegerForKey ("PointPerLevel", atoi(dbResult[choice*column+13]));
         
         //以下是新建的默认值
+        USER_DEFAULT->setIntegerForKey("GameTimes", 30);
         USER_DEFAULT->setIntegerForKey("SparePoint", 0);
         USER_DEFAULT->setIntegerForKey("Level", 1);
         USER_DEFAULT->setIntegerForKey("EXP", 0);

@@ -43,6 +43,7 @@ class UserData:public CCObject{
     CC_SYNTHESIZE(char*, Pic, Pic);
     CC_SYNTHESIZE(int, Level, Level);
     CC_SYNTHESIZE(int, EXP, EXP);
+    CC_SYNTHESIZE(int, GameTimes, GameTimes);
     
     CC_SYNTHESIZE(float, HP, HP);
     CC_SYNTHESIZE(float, ATK, ATK);
@@ -88,11 +89,11 @@ class UserData:public CCObject{
     CC_SYNTHESIZE(int, Accessor5, Accessor5);
     CC_SYNTHESIZE(int, Accessor6, Accessor6);
     
-    //装备影响的数值参数,a为倍率,b为加数
+    //装备影响的数值参数,a为倍率,
     CC_SYNTHESIZE(float, EncounterNum_a, EncounterNum_a);
-    CC_SYNTHESIZE(float, EncounterNum_b, EncounterNum_b);
+
     
-    
+    //属性最终值
     CC_SYNTHESIZE(float, Final_ATK, Final_ATK);
     CC_SYNTHESIZE(float, Final_DemageReduction, Final_DemageReduction);
     

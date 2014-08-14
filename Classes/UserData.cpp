@@ -21,6 +21,7 @@ UserData* UserData::LoadUserData(){
     instance->setPic(converstringtochar(USER_DEFAULT->getStringForKey("Pic")));
     instance->setLevel(USER_DEFAULT->getIntegerForKey("Level"));
     instance->setEXP(USER_DEFAULT->getIntegerForKey("EXP"));
+    instance->setGameTimes(USER_DEFAULT->getIntegerForKey("GameTimes"));
     
     instance->setHP(USER_DEFAULT->getFloatForKey("HP"));
     instance->setATK(USER_DEFAULT->getFloatForKey("ATK"));
@@ -53,7 +54,7 @@ UserData* UserData::LoadUserData(){
     instance->setMapArea(USER_DEFAULT->getIntegerForKey("MapArea"));
     
     instance->setEncounterNum_a(USER_DEFAULT->getFloatForKey("EncounterNum_a"));
-    instance->setEncounterNum_b(USER_DEFAULT->getFloatForKey("EncounterNum_b"));
+
     
     instance->setEquipBag(converstringtochar(USER_DEFAULT->getStringForKey("EquipBag")));
     
@@ -85,6 +86,7 @@ void UserData::SaveUserData(){
         USER_DEFAULT->setStringForKey("Pic", instance->getPic());
         USER_DEFAULT->setIntegerForKey("Level", instance->getLevel());
         USER_DEFAULT->setIntegerForKey("EXP", instance->getEXP());
+        USER_DEFAULT->setIntegerForKey("GameTimes", instance->getGameTimes());
         USER_DEFAULT->setFloatForKey("HP", instance->getHP());
         USER_DEFAULT->setFloatForKey("ATK", instance->getATK());
         USER_DEFAULT->setFloatForKey("DEF", instance->getDEF());
@@ -112,7 +114,6 @@ void UserData::SaveUserData(){
         USER_DEFAULT->setIntegerForKey("MapArea", instance->getMapArea());
         
         USER_DEFAULT->setFloatForKey("EncounterNum_a", instance->getEncounterNum_a());
-        USER_DEFAULT->setFloatForKey("EncounterNum_b", instance->getEncounterNum_b());
         
         USER_DEFAULT->setStringForKey("EquipBag", instance->getEquipBag());
         USER_DEFAULT->setIntegerForKey("Weapon1", instance->getWeapon1());
@@ -129,6 +130,8 @@ void UserData::SaveUserData(){
         USER_DEFAULT->setFloatForKey("Final_DemageReduction", instance->getFinal_DemageReduction());
         
         USER_DEFAULT->flush();
+        
+        
     }
     
     

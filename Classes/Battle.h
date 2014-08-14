@@ -74,7 +74,7 @@ private:
     CCLabelBMFont* startlabel;
     CCLabelBMFont* pauselabel;
     
-    void ExitNotify();
+//    void ExitNotify();
     
 
     

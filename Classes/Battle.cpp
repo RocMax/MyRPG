@@ -159,6 +159,7 @@ bool Battle::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent){
 
     //如果player loos，点击退出
     else if (isinbattle==false&&isbattlepaused==false&&isplayerfailed==true) {
+        userdata->SaveUserData();
         CCLog("结束画面,点击退出");
         const char*  battlelayerexited="BattleLayerExited";
         CCNotificationCenter::sharedNotificationCenter()->postNotification(battlelayerexited);
@@ -274,6 +275,7 @@ void Battle::PlayerAttackCallBack(CCNode* pSender){
     }
     else {
         CCLOG("player wins");
+        userdata->setGameTimes(userdata->getGameTimes()-1);
         monster->stopAllActions();
         player->stopAllActions();
         //战斗结束
@@ -295,6 +297,8 @@ void Battle::MonsterAttackCallBack(CCNode* pSender){
     }
     else {
         CCLOG("Player loses");
+        userdata->setGameTimes(userdata->getGameTimes()-3);
+        
         monster->stopAllActions();
         player->stopAllActions();
         //战斗结束画面
@@ -381,7 +385,7 @@ void Battle::finalview(bool isPlayerWins){
     else{
         blackbg->removeChildByTag(21);
         blackbg->removeChildByTag(22);
-        CCLabelBMFont* playerwinlabel=CCLabelBMFont::create("YOU LOOSE!", "myfont1.fnt");
+        CCLabelBMFont* playerwinlabel=CCLabelBMFont::create("YOU LOOSE! -3 GameTimes.", "myfont1.fnt");
         playerwinlabel->setPosition(ccp(blackbg->getContentSize().width/2,blackbg->getContentSize().height/4*3));
         blackbg->addChild(playerwinlabel);
         CCLabelBMFont* exitlabel=CCLabelBMFont::create("Click to Exit.", "myfont1.fnt");
@@ -454,11 +458,10 @@ void Battle::menucallback(cocos2d::CCObject *pSender){
     CCNotificationCenter::sharedNotificationCenter()->postNotification(battlelayerexited);
 }
 
-
-void Battle::ExitNotify(){
-    const char*  battlelayerexited="BattleLayerExited";
-    CCNotificationCenter::sharedNotificationCenter()->postNotification(battlelayerexited);
-}
+//void Battle::ExitNotify(){
+//    const char*  battlelayerexited="BattleLayerExited";
+//    CCNotificationCenter::sharedNotificationCenter()->postNotification(battlelayerexited);
+//}
 
 const char* Battle::IntToChar(int num){
     CCString* csnum=CCString::createWithFormat("%d",num);

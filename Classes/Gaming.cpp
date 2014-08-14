@@ -57,11 +57,34 @@ void Gaming::SetupViews(){
     
     //初始化遇怪数值
     Battle::setRandomSeed();
-    EncounterNum=(CCRANDOM_0_1()*100)*ud->getEncounterNum_a()+ud->getEncounterNum_b();
-    CCLog("encounternum=%f ,a=%f,b=%f",EncounterNum,ud->getEncounterNum_a(),ud->getEncounterNum_b());
+    EncounterNum=(CCRANDOM_0_1()*100)*ud->getEncounterNum_a();
+    CCLog("encounternum=%f ,a=%f",EncounterNum,ud->getEncounterNum_a());
     
+    //GameTimes
+    CCLabelBMFont* Gametimeslable=CCLabelBMFont::create("GameTimes :", "myfont1.fnt");
+    Gametimeslable->setAnchorPoint(ccp(1, 1));
+    Gametimeslable->setPosition(ccp(GetWinSize().width-100, GetWinSize().height-20));
+    this->addChild(Gametimeslable);
+    CCLabelAtlas* Gametimesnum=CCLabelAtlas::create(Battle::IntToChar( ud->getGameTimes()), "number.png", 24, 34, 48);
+    Gametimesnum->setAnchorPoint(ccp(0, 1));
+    Gametimesnum->setPosition(ccp(Gametimeslable->getPositionX()+20, Gametimeslable->getPositionY()-20));
+    this->addChild(Gametimesnum,50,30);
     
-    
+    //添加遇怪条
+    CCSprite* enbarbg=CCSprite::create("BarBox.png");
+    enbarbg->setAnchorPoint(ccp(1,0));
+    enbarbg->setPosition(ccp(GetWinSize().width-20, 20));
+    this->addChild(enbarbg);
+    CCSprite* enBarSprite=CCSprite::create("whitebar.png");
+    CCProgressTimer* enBar=CCProgressTimer::create(enBarSprite);
+    enBar->setType(kCCProgressTimerTypeBar);
+    enBar->setAnchorPoint(ccp(1, 0));
+    enBar->setPosition(ccp(GetWinSize().width-20, 20));
+    enBar->setMidpoint(ccp(0, 0.5));
+    enBar->setBarChangeRate(ccp(1, 0));
+//    enBar->setPercentage(100);
+    this->addChild(enBar,50,31);
+
 }
 
 CCSize Gaming::GetWinSize(){
@@ -88,6 +111,19 @@ void Gaming::update(float t){
     tiledMap->setPosition(getOffset(playerPosition));
     if (touchFlag) {
         movePlayer(targetPoint,t);
+        //设置遇怪条
+        CCProgressTimer* enbar=(CCProgressTimer*)this->getChildByTag(31);
+        enbar->setPercentage(enbar->getPercentage()+10*t);
+
+        if (enbar->getPercentage()<=30) {
+            enbar->setColor(ccc3(0, 255, 0));
+        }
+        else if (enbar->getPercentage()>30&&enbar->getPercentage()<=60) {
+            enbar->setColor(ccc3(255, 255, 0));
+        }
+        else if (enbar->getPercentage()>60){
+            enbar->setColor(ccc3(255, 0, 0));
+        }
     }
     
 }
@@ -204,10 +240,14 @@ void Gaming::btlayerExitObserver(){
     //刷新userdata
     ud=UserData::LoadUserData();
     ud->RefreshUserData();
-    
-    EncounterNum=(CCRANDOM_0_1()*100)*ud->getEncounterNum_a()+ud->getEncounterNum_b();
+    refreshGameTimes();
+    EncounterNum=(CCRANDOM_0_1()*100)*ud->getEncounterNum_a();
     CCLOG("new encounternum=%f",EncounterNum);
     this->resumeSchedulerAndActions();
     
 }
 
+void Gaming::refreshGameTimes(){
+    CCLabelAtlas* gametimeslabel=(CCLabelAtlas*)this->getChildByTag(30);
+    gametimeslabel->setString(Battle::IntToChar(ud->getGameTimes()));
+}
