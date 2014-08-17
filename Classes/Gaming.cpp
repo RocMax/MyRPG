@@ -116,13 +116,14 @@ void Gaming::update(float t){
         enbar->setPercentage(enbar->getPercentage()+10*t);
 
         if (enbar->getPercentage()<=30) {
-            enbar->setColor(ccc3(0, 255, 0));
+            enbar->setColor(ccGREEN);
         }
         else if (enbar->getPercentage()>30&&enbar->getPercentage()<=60) {
-            enbar->setColor(ccc3(255, 255, 0));
+            enbar->setColor(ccYELLOW);
+        
         }
         else if (enbar->getPercentage()>60){
-            enbar->setColor(ccc3(255, 0, 0));
+            enbar->setColor(ccRED);
         }
     }
     
@@ -244,6 +245,9 @@ void Gaming::btlayerExitObserver(){
     EncounterNum=(CCRANDOM_0_1()*100)*ud->getEncounterNum_a();
     CCLOG("new encounternum=%f",EncounterNum);
     this->resumeSchedulerAndActions();
+    CCProgressTimer* enbar=(CCProgressTimer*)this->getChildByTag(31);
+    enbar->setPercentage(0);
+
     
 }
 
