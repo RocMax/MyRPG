@@ -67,7 +67,7 @@ UserData* UserData::LoadUserData(){
     instance->setAccessor5(USER_DEFAULT->getIntegerForKey("Accessor5"));
     instance->setAccessor6(USER_DEFAULT->getIntegerForKey("Accessor6"));
     
-    //一下是计算后的值
+    //以下是计算后的值
     instance->setFinal_ATK(USER_DEFAULT->getFloatForKey("Final_ATK"));
     instance->setFinal_DemageReduction(USER_DEFAULT->getFloatForKey("Final_DemageReduction"));
 

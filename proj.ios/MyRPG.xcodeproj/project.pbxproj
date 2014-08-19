@@ -251,6 +251,7 @@
 		E8126ADD19610BF500FECCD0 /* manticore.png in Resources */ = {isa = PBXBuildFile; fileRef = E8126AD919610BF500FECCD0 /* manticore.png */; };
 		E8126ADF19610C9C00FECCD0 /* spector.png in Resources */ = {isa = PBXBuildFile; fileRef = E8126ADE19610C9C00FECCD0 /* spector.png */; };
 		E8126AE219610CD500FECCD0 /* SelectHero.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E8126AE019610CD500FECCD0 /* SelectHero.cpp */; };
+		E84FD50819A22CAA004C99E9 /* ItemData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E84FD50619A22CAA004C99E9 /* ItemData.cpp */; };
 		E874123F198A31E60022BF5F /* MonsterManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E874123E198A31E60022BF5F /* MonsterManager.cpp */; };
 		E8741242198B7E540022BF5F /* HPbar.png in Resources */ = {isa = PBXBuildFile; fileRef = E8741241198B7E540022BF5F /* HPbar.png */; };
 		E87D367F1966F2B8000C453C /* Gaming.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E87D367D1966F2B8000C453C /* Gaming.cpp */; };
@@ -798,6 +799,8 @@
 		E8126ADE19610C9C00FECCD0 /* spector.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spector.png; sourceTree = "<group>"; };
 		E8126AE019610CD500FECCD0 /* SelectHero.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SelectHero.cpp; path = ../Classes/SelectHero.cpp; sourceTree = "<group>"; };
 		E8126AE119610CD500FECCD0 /* SelectHero.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectHero.h; path = ../Classes/SelectHero.h; sourceTree = "<group>"; };
+		E84FD50619A22CAA004C99E9 /* ItemData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ItemData.cpp; path = ../Classes/ItemData.cpp; sourceTree = "<group>"; };
+		E84FD50719A22CAA004C99E9 /* ItemData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemData.h; path = ../Classes/ItemData.h; sourceTree = "<group>"; };
 		E874123E198A31E60022BF5F /* MonsterManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MonsterManager.cpp; sourceTree = "<group>"; };
 		E8741241198B7E540022BF5F /* HPbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HPbar.png; sourceTree = "<group>"; };
 		E87D367D1966F2B8000C453C /* Gaming.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Gaming.cpp; path = ../Classes/Gaming.cpp; sourceTree = "<group>"; };
@@ -1905,6 +1908,8 @@
 				E80FFF1019663FF2001DBCC1 /* UserData.h */,
 				E874123E198A31E60022BF5F /* MonsterManager.cpp */,
 				E89F81E8196BE0AA007417F8 /* MonsterManager.h */,
+				E84FD50619A22CAA004C99E9 /* ItemData.cpp */,
+				E84FD50719A22CAA004C99E9 /* ItemData.h */,
 			);
 			name = Characters;
 			sourceTree = "<group>";
@@ -2239,6 +2244,7 @@
 				15A3DAEE1682F8A6002FB0C5 /* SimpleAudioEngine.mm in Sources */,
 				15A3DAEF1682F8A6002FB0C5 /* SimpleAudioEngine_objc.m in Sources */,
 				1A27573F1697CF2B00504026 /* CCEditBoxImplAndroid.cpp in Sources */,
+				E84FD50819A22CAA004C99E9 /* ItemData.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				1AFAF8B816D35DE700DB1158 /* HelloWorldScene.cpp in Sources */,
 				1AC3624916D4A1E8000847F2 /* AppController.mm in Sources */,
