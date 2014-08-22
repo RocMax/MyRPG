@@ -61,12 +61,7 @@ class UserData:public CCObject{
     CC_SYNTHESIZE(int, SparePoint, SparePoint);
     
     CC_SYNTHESIZE(float, MoveSpeed, MoveSpeed);
-    CC_SYNTHESIZE(float, MultipleSpeed, MultipleSpeed);
-    
-    //主角计算属性
-    CC_SYNTHESIZE(float, ComboRatio, ComboRatio);
-    CC_SYNTHESIZE(float, CricialRatio, CriticalRatio);
-    CC_SYNTHESIZE(float, CriticalDamage, CriticalDamage);
+
     
     //地图及位置相关
     CC_SYNTHESIZE(char*, Map, Map);
@@ -77,25 +72,21 @@ class UserData:public CCObject{
     CC_SYNTHESIZE(int, MapArea, MapArea);
     
     //背包
-    CC_SYNTHESIZE(char*, EquipBag, EquipBag);
+    CC_SYNTHESIZE(CCDictionary*, EquipBag, EquipBag);
     
     //装备栏
-    CC_SYNTHESIZE(int, Weapon1, Weapon1);
-    CC_SYNTHESIZE(int, Armor1, Armor1);
-    CC_SYNTHESIZE(int, Accessor1, Accessor1);
-    CC_SYNTHESIZE(int, Accessor2, Accessor2);
-    CC_SYNTHESIZE(int, Accessor3, Accessor3);
-    CC_SYNTHESIZE(int, Accessor4, Accessor4);
-    CC_SYNTHESIZE(int, Accessor5, Accessor5);
-    CC_SYNTHESIZE(int, Accessor6, Accessor6);
-    
-    //装备影响的数值参数,a为倍率,
-    CC_SYNTHESIZE(float, EncounterNum_a, EncounterNum_a);
-
+    CC_SYNTHESIZE(CCDictionary*, equipments, equipments);
     
     //属性最终值
     CC_SYNTHESIZE(float, Final_ATK, Final_ATK);
     CC_SYNTHESIZE(float, Final_DemageReduction, Final_DemageReduction);
+    
+    CC_SYNTHESIZE(float, Final_ComboRatio, Final_ComboRatio);
+    CC_SYNTHESIZE(float, Final_CricialRatio, Final_CriticalRatio);
+    CC_SYNTHESIZE(float, Final_CriticalDamage, Final_CriticalDamage);
+    
+    CC_SYNTHESIZE(float, Final_EncounterRate, Final_EncounterRate);
+    CC_SYNTHESIZE(float, Final_MoveSpeed, Final_MoveSpeed);
     
 public:
     static UserData* LoadUserData();
@@ -105,6 +96,11 @@ public:
     
     static char* converstringtochar(string s);
     static string convertchartostring(char* c);
+    
+    static CCDictionary* convertchartodic(char* c);
+    static char* convertdictochar(CCDictionary* d);
+    
+    
     
 
     

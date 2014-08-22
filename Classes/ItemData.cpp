@@ -9,7 +9,7 @@
 #include "ItemData.h"
 #include "DBOperations.h"
 
-static ItemData* instance=NULL;
+ItemData* instance=NULL;
 
 ItemData* ItemData::getItemData(int ItemID){
     if (!instance) {
