@@ -162,6 +162,7 @@ void Status::okmeuncallback(cocos2d::CCNode *pSender){
     ud->setAGI(atof(statunum4->getString()));
     ud->setLUK(atof(statunum5->getString()));
     ud->SaveUserData();
+    ud->RefreshUserData();
     CCDirector::sharedDirector()->popScene();
 }
 void Status::canclemenucallback(cocos2d::CCNode *pSender){

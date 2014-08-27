@@ -18,6 +18,7 @@ static UserData* instance=NULL;
 UserData* UserData::LoadUserData(){
     if (!instance) {
         instance=new UserData();
+        instance->retain();
 
     }
     instance->setName(converstringtochar(USER_DEFAULT->getStringForKey("Name")));
@@ -111,7 +112,7 @@ void UserData::RefreshUserData(){
     instance->setFinal_DEF(instance->getDEF()*instance->getDEFPerPoint()+instance->equpmentsaddup(ItemData::eItemDEF));
     //敏捷值计算方法:点数*每点加的敏捷值+装备提供的敏捷值
     instance->setFinal_AGI(instance->getAGI()*instance->getAGIPerPoint()+instance->equpmentsaddup(ItemData::eItemAGI));
-    //幸运值计算方法:点数*每点加的幸运值+装备提供的幸运值
+    //幸运值计算方法:点数*每点加的 值+装备提供的幸运值
     instance->setFinal_LUK(instance->getLUK()*instance->getLUKPerPoint()+instance->equpmentsaddup(ItemData::eItemLUK));
     
     //以下是计算属性
