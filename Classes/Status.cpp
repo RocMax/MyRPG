@@ -22,6 +22,7 @@ bool Status::init(){
     do {
         CC_BREAK_IF(!CCLayer::init());
         ud=UserData::LoadUserData();
+        CCLog("equip:%s   Bag:%s",USER_DEFAULT->getStringForKey("Equipments").c_str(),USER_DEFAULT->getStringForKey("EquipBag").c_str());
         sRect=true;
     } while (0);
     return sRect;

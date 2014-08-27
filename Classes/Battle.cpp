@@ -59,7 +59,7 @@ void Battle::setupViewsWithData(UserData *ud){
     player->setAnchorPoint(ccp(0.5, 0.5));
     player->setPosition(ccp(blackbg->getContentSize().width/2,blackbg->getContentSize().height/4));
     
-    pHP=userdata->getHP();
+    pHP=userdata->getFinal_HP();
     //添加player血条
     CCSprite* pHPBarbg=CCSprite::create("BarBox.png");
     pHPBarbg->setAnchorPoint(ccp(0.5, 0.5));
@@ -125,7 +125,7 @@ bool Battle::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent){
         isinbattle=true;
         isbattlepaused=false;
         isplayerfailed=false;
-        maxCombo_player=ComboCheck(userdata->getComboRatio());
+        maxCombo_player=ComboCheck(userdata->getFinal_ComboRatio());
         CCLOG("new maxCombo_player=%d",maxCombo_player);
         maxCombo_monster=ComboCheck(mm->getM_ComboRatio());
         //        CCLOG("new maxCombo_monster=%d",maxCombo_monster);
@@ -187,13 +187,13 @@ void Battle::setRandomSeed(){
 void Battle::PlayerAttack(){
     float damage;
     float criticaldamage;
-    bool isCritical=isCriticalHit(userdata->getCriticalRatio());
+    bool isCritical=isCriticalHit(userdata->getFinal_CriticalRatio());
     
     //判断是否暴击
     if (isCritical) {
         //monster受到暴击的特效,暂时和不暴击一样
         AttackEffect::atkeffect()->attack(monster->getParent(), monster->getPosition());
-        criticaldamage=userdata->getCriticalDamage();
+        criticaldamage=userdata->getFinal_CriticalDamage();
     }
     else {
         //monster受到普通攻击的特效
@@ -205,8 +205,8 @@ void Battle::PlayerAttack(){
     comboNO_player++;
     CCLog("player combo:%d",comboNO_player);
     
-    //公式有问题,先完善refreshuserdata
-    damage=userdata->getATK()*(1-mm->getM_DamageReduction()*levelCorrection(userdata->getLevel(), mm->getM_Level()))*criticaldamage;
+    //player对怪的伤害,计算公式:人对怪物伤害=攻击力*(1-伤害减免*级别差修正)*暴击倍率
+    damage=userdata->getFinal_ATK()*(1-mm->getM_DamageReduction()*levelCorrection(userdata->getLevel(), mm->getM_Level()))*criticaldamage;
     
     //monster扣血
     mHP-=damage;
@@ -242,11 +242,9 @@ void Battle::MonsterAttack(){
     CCCallFuncN* callback=CCCallFuncN::create(this, callfuncN_selector(Battle::MonsterAttackCallBack));
     player->runAction(CCSequence::create(CCShake::create(0.4, 5),CCDelayTime::create(1.0),callback,NULL));
     comboNO_monster++;
-    //    CCLOG("player combo:%d",comboNO_player);
     
-    
-    //公式有问题,先完善refreshuserdata
-    damage=mm->getM_ATK()*(1-userdata->getFinal_DemageReduction()*levelCorrection(mm->getM_Level(), userdata->getLevel()))*criticaldamage;
+    //计算伤害,公式为:怪物对人伤害=攻击力*(1-伤害减免*级别差修正)*暴击倍率
+    damage=mm->getM_ATK()*(1-userdata->getFinal_DamageReduction()*levelCorrection(mm->getM_Level(), userdata->getLevel()))*criticaldamage;
     
     //plaer扣血
     pHP-=damage;
@@ -256,7 +254,7 @@ void Battle::MonsterAttack(){
     DamageNumber::shareddamagenumber()->getDanageEffect(player, isCritical, damage);
     
     //修改player的HPbar
-    pHPBar->setPercentage(pHP/userdata->getHP()*100);
+    pHPBar->setPercentage(pHP/userdata->getFinal_HP()*100);
     
     
 
@@ -377,7 +375,8 @@ void Battle::finalview(bool isPlayerWins){
         EXPBar->setPercentage(userdata->getEXP()/pow(userdata->getLevel(), EXP_POWER)*100);
         blackbg->addChild(EXPBar);
         EXPnow=userdata->getEXP();
-        EXPadd=mm->getM_Exp();
+        //计算打怪所得经验,公式为:经验=怪物经验提供值*random(0.9,1.1)*(1+道具经验加成)
+        EXPadd=((float)mm->getM_Exp()*(CCRANDOM_0_1()*0.2+0.9)*(1+userdata->getFinal_ExpRate()));
         EXPmax=pow(userdata->getLevel(), EXP_POWER)+99;
     
         LevelUp();
@@ -448,6 +447,7 @@ void Battle::EXPBarcallbackLv(cocos2d::CCNode *pSender){
 }
 
 void Battle::menucallback(cocos2d::CCObject *pSender){
+    CCLog("equip:%s   Bag:%s",USER_DEFAULT->getStringForKey("Equipments").c_str(),USER_DEFAULT->getStringForKey("EquipBag").c_str());
     userdata->SaveUserData();
     int tag=((CCMenuItemLabel*)pSender)->getTag();
     if (tag==42) {

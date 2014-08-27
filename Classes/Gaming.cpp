@@ -31,6 +31,8 @@ void Gaming::SetupViews(){
     ud=UserData::LoadUserData();
     ud->RefreshUserData();
     ud->retain();
+    
+    CCLog("equipment:%s  bag:%s",USER_DEFAULT->getStringForKey("Equipments").c_str(),USER_DEFAULT->getStringForKey("EquipBag").c_str());
 
     //生成地图
     tiledMap=CCTMXTiledMap::create(ud->getMap());
@@ -57,8 +59,8 @@ void Gaming::SetupViews(){
     
     //初始化遇怪数值
     Battle::setRandomSeed();
-    EncounterNum=(CCRANDOM_0_1()*100)*ud->getEncounterNum_a();
-    CCLog("encounternum=%f ,a=%f",EncounterNum,ud->getEncounterNum_a());
+    EncounterNum=(CCRANDOM_0_1()*100)*(1+ud->getFinal_EncounterRate());
+    CCLog("encounternum=%f",EncounterNum);
     
     //GameTimes
     CCLabelBMFont* Gametimeslable=CCLabelBMFont::create("GameTimes :", "myfont1.fnt");
@@ -142,7 +144,7 @@ CCPoint Gaming::getOffset(CCPoint viewPoint){
 //移动Player
 void Gaming::movePlayer(CCPoint targetpos,float t){
     CCPoint curpos=ccpAdd(player->getPosition(), getOffset(player->getPosition()));
-    float speed=ud->getMoveSpeed()*ud->getMultipleSpeed();
+    float speed=ud->getFinal_MoveSpeed();
     if (ccpDistance(curpos, targetpos)>speed) {
         CCPoint normvector=ccpNormalize(ccp(targetpos.x-curpos.x, targetpos.y-curpos.y));
         CCPoint nextposition=ccpSub(ccp(curpos.x+normvector.x*speed, curpos.y+normvector.y*speed), getOffset(player->getPosition()));
@@ -242,7 +244,7 @@ void Gaming::btlayerExitObserver(){
     ud=UserData::LoadUserData();
     ud->RefreshUserData();
     refreshGameTimes();
-    EncounterNum=(CCRANDOM_0_1()*100)*ud->getEncounterNum_a();
+    EncounterNum=(CCRANDOM_0_1()*100)*(1+ud->getFinal_EncounterRate());
     CCLOG("new encounternum=%f",EncounterNum);
     this->resumeSchedulerAndActions();
     CCProgressTimer* enbar=(CCProgressTimer*)this->getChildByTag(31);

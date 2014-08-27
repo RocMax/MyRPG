@@ -7,7 +7,9 @@
 //
 
 #include "UserData.h"
-#include "ItemData.h"
+
+
+
 
 
 
@@ -45,14 +47,9 @@ UserData* UserData::LoadUserData(){
     instance->setPositionX(USER_DEFAULT->getIntegerForKey("PositionX"));
     instance->setPositionY(USER_DEFAULT->getIntegerForKey("PositionY"));
     instance->setMapArea(USER_DEFAULT->getIntegerForKey("MapArea"));
-
     
-
-    
-    //以下是计算后的值
-    instance->setFinal_ATK(USER_DEFAULT->getFloatForKey("Final_ATK"));
-    instance->setFinal_DemageReduction(USER_DEFAULT->getFloatForKey("Final_DemageReduction"));
-
+    instance->setEquipBag(convertchartodic(converstringtochar(USER_DEFAULT->getStringForKey("EquipBag"))));
+    instance->setEquipments(convertchartodic(converstringtochar(USER_DEFAULT->getStringForKey("Equipments"))));
     
     return instance;
 }
@@ -93,7 +90,7 @@ void UserData::SaveUserData(){
         
         //存储装备和包裹的字符串
         USER_DEFAULT->setStringForKey("EquipBag", convertdictochar(instance->getEquipBag()));
-        USER_DEFAULT->setStringForKey("Equipments", convertdictochar(instance->getequipments()));
+        USER_DEFAULT->setStringForKey("Equipments", convertdictochar(instance->getEquipments()));
         
         USER_DEFAULT->flush();
         
@@ -102,10 +99,39 @@ void UserData::SaveUserData(){
     
 }
 
-//根据主角基础数值及装备情况刷新最终数值,在升级加点或更换装备后调用此函数
+//根据主角基础数值及装备情况刷新最终数值,在升级加点或更换装备后调用此函数,在首次生成UserData时也需调用
 void UserData::RefreshUserData(){
-    USER_DEFAULT->setFloatForKey("Final_ATK", USER_DEFAULT->getFloatForKey("ATK")); //需修改
-    USER_DEFAULT->setFloatForKey("Final_DemageReduction", DAMAGE_REDUCTION_k/(USER_DEFAULT->getFloatForKey("DEF")+DAMAGE_REDUCTION_a)+DAMAGE_REDUCTION_b);
+    //基础属性计算
+    //生命值计算方法:点数*每点加的生命值+武器装备提供的生命值
+    instance->setFinal_HP(instance->getHP()*instance->getHPPerPoint()+instance->equpmentsaddup(ItemData::eItemHP));
+    //攻击力计算方法:(点数*每点加的攻击力+武器装备提供的攻击力)*武器提供的攻击倍率
+    instance->setFinal_ATK((instance->getATK()*instance->getATKPerPoint()+instance->equpmentsaddup(ItemData::eItemATK))*(1+((ItemData*)instance->getEquipments()->objectForKey(0))->getWeaponATKRate()));
+    //防御力计算方法:点数*每点加的防御力+装备提供的防御力
+    instance->setFinal_DEF(instance->getDEF()*instance->getDEFPerPoint()+instance->equpmentsaddup(ItemData::eItemDEF));
+    //敏捷值计算方法:点数*每点加的敏捷值+装备提供的敏捷值
+    instance->setFinal_AGI(instance->getAGI()*instance->getAGIPerPoint()+instance->equpmentsaddup(ItemData::eItemAGI));
+    //幸运值计算方法:点数*每点加的幸运值+装备提供的幸运值
+    instance->setFinal_LUK(instance->getLUK()*instance->getLUKPerPoint()+instance->equpmentsaddup(ItemData::eItemLUK));
+    
+    //以下是计算属性
+    //伤害减免计算方法:k/(def+a)+b
+    instance->setFinal_DamageReduction(DAMAGE_REDUCTION_k/(instance->getFinal_DEF()+DAMAGE_REDUCTION_a)+DAMAGE_REDUCTION_b);
+    //攻击吸血计算方法:装备提供的攻击吸血
+    instance->setFinal_HPAbsorb(instance->equpmentsaddup(ItemData::eHPAbsorb));
+    //连击率计算方法:k/(agi+a)+b
+    instance->setFinal_ComboRatio(COMBO_RATIO_k/(instance->getFinal_AGI()+COMBO_RATIO_a)+COMBO_RATIO_b);
+    //暴击率计算方法:k/(agi+a)+b
+    instance->setFinal_CriticalRatio(CRITICAL_RATIO_k/(instance->getFinal_AGI()+CRITICAL_RATIO_a)+CRITICAL_RATIO_b);
+    //暴击伤害计算方法:k/(agi+a)+b
+    instance->setFinal_CriticalDamage(CRITICAL_DAMAGE_k/(instance->getFinal_AGI()+CRITICAL_DAMAGE_a)+CRITICAL_DAMAGE_b);
+    //遇怪速率计算方法:装备提供的遇怪速率
+    instance->setFinal_EncounterRate(instance->equpmentsaddup(ItemData::eEncounterRate));
+    //移动速度计算方法:原始移动速度*(1+装备提供的速度加成)
+    instance->setFinal_MoveSpeed(SPEED_DEFAULT*(1+instance->equpmentsaddup(ItemData::eSpeedRate)));
+    //道具经验加成计算方法:装备提供的经验加成
+    instance->setFinal_ExpRate(instance->equpmentsaddup(ItemData::eExpRate));
+    //幸运加成计算方法:k/(luk+a)+b
+    instance->setFinal_LUKAddition(LUK_ADDITION_k/(instance->getFinal_LUK()+LUK_ADDITION_a)+LUK_ADDITION_b);
 
 }
 
@@ -113,10 +139,7 @@ void UserData::RefreshUserData(){
 
 
 char* UserData::converstringtochar(string s){
-    const char* c=s.c_str();
-    char* buff=new char[strlen(c)+1];
-    strcpy(buff, c);
-    return buff;
+    return strdup(s.c_str());
 }
 
 string UserData::convertchartostring(char *c){
@@ -127,27 +150,56 @@ string UserData::convertchartostring(char *c){
 //将字符串转化为存储装备属性的CCDictionary,key0-8分别表示武器,防具,饰品1-6
 CCDictionary* UserData::convertchartodic(char *c){
     CCDictionary* dic=CCDictionary::create();
-    char* temp=strdup(c);
-    const char* delim=":";
-    int i=0;
-    do {
-        int itemid=atoi(strsep(&temp, delim)) ;
-        ItemData* idata=ItemData::getItemData(itemid);
-        dic->setObject(idata, i);
-        i++;
-    } while (temp!=NULL);
-    return dic ;
-
+    if (strcmp(c, "")==0) {
+        dic=NULL;
+    }
+    else{
+        
+        char* temp=strdup(c);
+        const char* delim=":";
+        int i=0;
+        do {
+            int itemid=atoi(strsep(&temp, delim)) ;
+            ItemData* idata=ItemData::getItemData(itemid);
+            dic->setObject(idata, i);
+            i++;
+        } while (temp!=NULL);
+    }
+    return dic;
 }
 
 char* UserData::convertdictochar(cocos2d::CCDictionary *d){
-    CCDictElement* pElement;
-    CCString* str;
-    CCDICT_FOREACH(d, pElement){
-        if (pElement!=NULL) {
-            ItemData* idata= (ItemData*)pElement;
-            str=CCString::createWithFormat("%s:%d",str->getCString(),idata->getItemID());
-        }
+    if (d==NULL) {
+        return strdup("") ;
     }
-    return strdup(str->getCString());
+    else{
+        CCDictElement* pElement;
+        CCString* str=CCString::createWithFormat("");
+        CCDICT_FOREACH(d, pElement){
+            if (pElement!=NULL) {
+                ItemData* idata= (ItemData*)pElement->getObject();
+                str=CCString::createWithFormat("%s:%d",str->getCString(),idata->getItemID());
+            }
+            else continue;
+        }
+        char* temp=strdup(str->getCString());
+        strsep(&temp, ":");   //切掉开头多余的":"
+        return temp;
+    }
 }
+
+float UserData::equpmentsaddup(ItemData::enumStatu statuID){
+    CCDictElement* pElement;
+    CCDictionary* dic=instance->getEquipments();
+    float sum=0;
+    CCDICT_FOREACH(dic, pElement){
+        ItemData* idata= (ItemData*)pElement->getObject();
+        ItemData::pGet p=idata->getgetFounc(statuID);
+        sum+=(idata->*p)();
+    }
+    return sum;
+}
+
+
+
+

@@ -26,18 +26,25 @@ class ItemData:public CCObject{
     CC_SYNTHESIZE(float, ItemDEF, ItemDEF);
     CC_SYNTHESIZE(float, ItemAGI, ItemAGI);
     CC_SYNTHESIZE(float, ItemLUK, ItemLUK);
+    CC_SYNTHESIZE(float, WeaponATKRate, WeaponATKRate);
     CC_SYNTHESIZE(float, HPAbsorb, HPAbsorb);
-    CC_SYNTHESIZE(float, ExpRate, ExpRate);
     CC_SYNTHESIZE(float, CriRate, CriRate);
     CC_SYNTHESIZE(float, CriDam, CriDam);
     CC_SYNTHESIZE(float, ComboRate, ComboRate);
     CC_SYNTHESIZE(float, EncounterRate, EncounterRate);
     CC_SYNTHESIZE(float, SpeedRate, SpeedRate);
-    CC_SYNTHESIZE(float, ItemDropRate, ItemDropRate);
-    CC_SYNTHESIZE(float, GoldGropRate, GoldDropRate);
+    CC_SYNTHESIZE(float, LUKAddition, LUKAddition);
+    CC_SYNTHESIZE(float, ItemDropAddition, ItemDropAddition);
+    CC_SYNTHESIZE(float, GoldDropAddition, GoldDropAddition)
+    CC_SYNTHESIZE(float, ExpRate, ExpRate);
+
+    //属性枚举
+    enum enumStatu{eItemHP,eItemATK,eItemDEF,eItemAGI,eItemLUK,eWeaponATKRate,eHPAbsorb,eCriRate,eCriDam,eComboRate,eEncounterRate,eSpeedRate,eLUKAddition,eItemDropAddition,eGoldDropAddition,eExpRate};
+    typedef float (ItemData::*pGet) () const;
     
 public:
     static ItemData* getItemData(int ItemID);
+    pGet getgetFounc(enumStatu statuID);
 private:
     static int sqlite_callback(
                                void* pv,    /* 由 sqlite3_exec() 的第四个参数传递而来 */
@@ -45,8 +52,6 @@ private:
                                char** dbResult,    /* 指向查询结果的指针数组, 可以由 sqlite3_column_text() 得到 */
                                char** col        /* 指向表头名的指针数组, 可以由 sqlite3_column_name() 得到 */
     );
-
-    
     
 };
 

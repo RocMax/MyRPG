@@ -213,18 +213,10 @@ void SelectHero::okmenucallback(cocos2d::CCObject *pSender){
         USER_DEFAULT->setIntegerForKey("MapOffsetX", 0);
         USER_DEFAULT->setIntegerForKey("MapOffsetY", 0);
         USER_DEFAULT->setIntegerForKey("MapArea", 0);
-        USER_DEFAULT->setFloatForKey("EncounterNum_a", 1.0f);
-        USER_DEFAULT->setFloatForKey("EncounterNum_b", 0);
-        USER_DEFAULT->setFloatForKey("MoveSpeed", SPEED_DEFAULT);
-        USER_DEFAULT->setFloatForKey("MultipleSpeed", 1.0f);
         USER_DEFAULT->setStringForKey("Map", "Tiledmap.tmx");
         
-        USER_DEFAULT->setFloatForKey("ComboRatio", 0.3f);  //初始值为0,测试数据
-        USER_DEFAULT->setFloatForKey("CriticalRatio", 0.3f);  //初始值为0.05,测试数据
-        USER_DEFAULT->setFloatForKey("CriticalDamage", 1.1f);
-        
-        
-        
+        USER_DEFAULT->setStringForKey("Equipments","2:3:1:1:1:1:1:1");
+        USER_DEFAULT->setStringForKey("EquipBag", "");
         
         USER_DEFAULT->flush();
         

@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "cocos2d.h"
+#include "ItemData.h"
 
 #define USER_DEFAULT CCUserDefault::sharedUserDefault()
 #define SPEED_DEFAULT 10.0f
@@ -33,9 +34,14 @@
 #define CRITICAL_DAMAGE_k -28302
 #define CRITICAL_DAMAGE_b 10.534
 
+#define COMBO_RATIO_a 3000
+#define COMBO_RATIO_k -4770
+#define COMBO_RATIO_b 1.95
 
 using namespace std;
 USING_NS_CC;
+
+
 
 class UserData:public CCObject{
     //主角基础属性
@@ -75,18 +81,29 @@ class UserData:public CCObject{
     CC_SYNTHESIZE(CCDictionary*, EquipBag, EquipBag);
     
     //装备栏
-    CC_SYNTHESIZE(CCDictionary*, equipments, equipments);
+    CC_SYNTHESIZE(CCDictionary*, Equipments, Equipments);
     
-    //属性最终值
+    //基础属性最终值
+    CC_SYNTHESIZE(float, Final_HP, Final_HP);
     CC_SYNTHESIZE(float, Final_ATK, Final_ATK);
-    CC_SYNTHESIZE(float, Final_DemageReduction, Final_DemageReduction);
+    CC_SYNTHESIZE(float, Final_DEF, Final_DEF);
+    CC_SYNTHESIZE(float, Final_AGI, Final_AGI);
+    CC_SYNTHESIZE(float, Final_LUK, Final_LUK);
     
+    //计算属性最终值
+    CC_SYNTHESIZE(float, Final_DamageReduction, Final_DamageReduction);
+    CC_SYNTHESIZE(float, Final_HPAbsorb, Final_HPAbsorb);
     CC_SYNTHESIZE(float, Final_ComboRatio, Final_ComboRatio);
     CC_SYNTHESIZE(float, Final_CricialRatio, Final_CriticalRatio);
     CC_SYNTHESIZE(float, Final_CriticalDamage, Final_CriticalDamage);
     
     CC_SYNTHESIZE(float, Final_EncounterRate, Final_EncounterRate);
     CC_SYNTHESIZE(float, Final_MoveSpeed, Final_MoveSpeed);
+    
+    CC_SYNTHESIZE(float, Final_ExpRate, Final_ExpRate);
+    CC_SYNTHESIZE(float, Final_LUKAddition, Final_LUKAddition);
+    
+
     
 public:
     static UserData* LoadUserData();
@@ -100,12 +117,10 @@ public:
     static CCDictionary* convertchartodic(char* c);
     static char* convertdictochar(CCDictionary* d);
     
-    
+private:
+    float equpmentsaddup(ItemData::enumStatu statuID);
     
 
-    
-    
-    
     
 };
 
