@@ -105,7 +105,8 @@ void UserData::RefreshUserData(){
     //生命值计算方法:点数*每点加的生命值+武器装备提供的生命值
     instance->setFinal_HP(instance->getHP()*instance->getHPPerPoint()+instance->equpmentsaddup(ItemData::eItemHP));
     //攻击力计算方法:(点数*每点加的攻击力+武器装备提供的攻击力)*武器提供的攻击倍率
-    instance->setFinal_ATK((instance->getATK()*instance->getATKPerPoint()+instance->equpmentsaddup(ItemData::eItemATK))*(1+((ItemData*)instance->getEquipments()->objectForKey(0))->getWeaponATKRate()));
+//    instance->setFinal_ATK((instance->getATK()*instance->getATKPerPoint()+instance->equpmentsaddup(ItemData::eItemATK))*(1+((ItemData*)instance->getEquipments()->objectForKey(0))->getWeaponATKRate()));
+    instance->setFinal_ATK((instance->getATK()*instance->getATKPerPoint()+instance->equpmentsaddup(ItemData::eItemATK))*(1+instance->equpmentsaddup(ItemData::eWeaponATKRate)));
     //防御力计算方法:点数*每点加的防御力+装备提供的防御力
     instance->setFinal_DEF(instance->getDEF()*instance->getDEFPerPoint()+instance->equpmentsaddup(ItemData::eItemDEF));
     //敏捷值计算方法:点数*每点加的敏捷值+装备提供的敏捷值
@@ -150,16 +151,16 @@ string UserData::convertchartostring(char *c){
 //将字符串转化为存储装备属性的CCDictionary,key0-8分别表示武器,防具,饰品1-6
 CCDictionary* UserData::convertchartodic(char *c){
     CCDictionary* dic=CCDictionary::create();
-    if (strcmp(c, "")==0) {
+    if (strcmp(c, "0")==0) {
         dic=NULL;
     }
     else{
-        
         char* temp=strdup(c);
-        const char* delim=":";
+        strsep(&temp, "0:");
+//        const char* delim=":";
         int i=0;
         do {
-            int itemid=atoi(strsep(&temp, delim)) ;
+            int itemid=atoi(strsep(&temp, ":")) ;
             ItemData* idata=ItemData::getItemData(itemid);
             dic->setObject(idata, i);
             i++;
@@ -169,12 +170,9 @@ CCDictionary* UserData::convertchartodic(char *c){
 }
 
 char* UserData::convertdictochar(cocos2d::CCDictionary *d){
-    if (d==NULL) {
-        return strdup("") ;
-    }
-    else{
+    if (d!=NULL) {
         CCDictElement* pElement;
-        CCString* str=CCString::createWithFormat("");
+        CCString* str=CCString::createWithFormat("0");
         CCDICT_FOREACH(d, pElement){
             if (pElement!=NULL) {
                 ItemData* idata= (ItemData*)pElement->getObject();
@@ -182,9 +180,12 @@ char* UserData::convertdictochar(cocos2d::CCDictionary *d){
             }
             else continue;
         }
-        char* temp=strdup(str->getCString());
-        strsep(&temp, ":");   //切掉开头多余的":"
-        return temp;
+        //        char* temp=strdup(str->getCString());
+        //        strsep(&temp, ":");   //切掉开头多余的":"
+        return strdup(str->getCString());
+    }
+    else{
+        return strdup("0") ;
     }
 }
 

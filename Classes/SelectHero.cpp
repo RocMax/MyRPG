@@ -215,8 +215,8 @@ void SelectHero::okmenucallback(cocos2d::CCObject *pSender){
         USER_DEFAULT->setIntegerForKey("MapArea", 0);
         USER_DEFAULT->setStringForKey("Map", "Tiledmap.tmx");
         
-        USER_DEFAULT->setStringForKey("Equipments","2:3:1:1:1:1:1:1");
-        USER_DEFAULT->setStringForKey("EquipBag", "");
+        USER_DEFAULT->setStringForKey("Equipments","0:2:3:1:1:1:1:1:1");
+        USER_DEFAULT->setStringForKey("EquipBag", "0");
         
         USER_DEFAULT->flush();
         
