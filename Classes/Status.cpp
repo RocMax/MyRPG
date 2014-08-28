@@ -12,7 +12,7 @@
 
 CCScene* Status::scene(){
     CCScene* pScene=CCScene::create();
-    CCLayer* pLayer=Status::create();
+    Status* pLayer=Status::create();
     pScene->addChild(pLayer);
     return pScene;
 }
@@ -22,7 +22,7 @@ bool Status::init(){
     do {
         CC_BREAK_IF(!CCLayer::init());
         ud=UserData::LoadUserData();
-        CCLog("equip:%s   Bag:%s",USER_DEFAULT->getStringForKey("Equipments").c_str(),USER_DEFAULT->getStringForKey("EquipBag").c_str());
+//        CCLog("equip:%s   Bag:%s",USER_DEFAULT->getStringForKey("Equipments").c_str(),USER_DEFAULT->getStringForKey("EquipBag").c_str());
         sRect=true;
     } while (0);
     return sRect;
@@ -36,13 +36,13 @@ void Status::onEnter(){
 void Status::draw(){
     CCSize winsize=CCDirector::sharedDirector()->getWinSize();
     ccDrawLine(ccp(0, winsize.height*3/4), ccp(winsize.width, winsize.height*3/4));
-    
     CHECK_GL_ERROR_DEBUG();
 }
 
 CCSize Status::getWinsize(){
     return CCDirector::sharedDirector()->getWinSize();
 }
+
 
 void  Status::setupViews(){
     sp=ud->getSparePoint();

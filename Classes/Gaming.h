@@ -56,6 +56,7 @@ private:
     CCPoint getTiledCoord(CCPoint position);
     bool isReachable(CCPoint tileCoord);
     int getMapLevel(CCPoint tileCoord);
+    void EquipmentsMenucallback(CCObject* pSender);
 };
 
 #endif /* defined(__MyRPG__Gaming__) */

@@ -275,6 +275,7 @@
 		E89FBF3D198E72C500DC4D5E /* LevelUpEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E89FBF3B198E72C500DC4D5E /* LevelUpEffect.cpp */; };
 		E89FBF40198F769300DC4D5E /* BarBox.png in Resources */ = {isa = PBXBuildFile; fileRef = E89FBF3F198F769300DC4D5E /* BarBox.png */; };
 		E89FBF42198FA96100DC4D5E /* LevelUP.png in Resources */ = {isa = PBXBuildFile; fileRef = E89FBF41198FA96100DC4D5E /* LevelUP.png */; };
+		E8B3A3EB19AF0C2500244A65 /* Equipment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E8B3A3E919AF0C2500244A65 /* Equipment.cpp */; };
 		E8B5B7E719614BBC00612BCC /* cyclops_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = E8B5B7E619614BBC00612BCC /* cyclops_gray.png */; };
 		E8B5B7EC196150E300612BCC /* hobit_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = E8B5B7E8196150E300612BCC /* hobit_gray.png */; };
 		E8B5B7ED196150E300612BCC /* lizardman_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = E8B5B7E9196150E300612BCC /* lizardman_gray.png */; };
@@ -832,6 +833,8 @@
 		E89FBF3C198E72C500DC4D5E /* LevelUpEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LevelUpEffect.h; path = ../Classes/LevelUpEffect.h; sourceTree = "<group>"; };
 		E89FBF3F198F769300DC4D5E /* BarBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BarBox.png; sourceTree = "<group>"; };
 		E89FBF41198FA96100DC4D5E /* LevelUP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LevelUP.png; sourceTree = "<group>"; };
+		E8B3A3E919AF0C2500244A65 /* Equipment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Equipment.cpp; path = ../Classes/Equipment.cpp; sourceTree = "<group>"; };
+		E8B3A3EA19AF0C2500244A65 /* Equipment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Equipment.h; path = ../Classes/Equipment.h; sourceTree = "<group>"; };
 		E8B5B7E619614BBC00612BCC /* cyclops_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cyclops_gray.png; sourceTree = "<group>"; };
 		E8B5B7E8196150E300612BCC /* hobit_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hobit_gray.png; sourceTree = "<group>"; };
 		E8B5B7E9196150E300612BCC /* lizardman_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lizardman_gray.png; sourceTree = "<group>"; };
@@ -1938,6 +1941,8 @@
 				E88DD3F319852BA4000F601F /* Home.h */,
 				E8ED1EF61998997000CC6BFC /* Status.cpp */,
 				E8ED1EF71998997000CC6BFC /* Status.h */,
+				E8B3A3E919AF0C2500244A65 /* Equipment.cpp */,
+				E8B3A3EA19AF0C2500244A65 /* Equipment.h */,
 			);
 			name = Scene;
 			sourceTree = "<group>";
@@ -2181,6 +2186,7 @@
 				15A3D9AD1682F7F9002FB0C5 /* cpSpaceHash.c in Sources */,
 				15A3D9AE1682F7F9002FB0C5 /* cpSpaceQuery.c in Sources */,
 				15A3D9AF1682F7F9002FB0C5 /* cpSpaceStep.c in Sources */,
+				E8B3A3EB19AF0C2500244A65 /* Equipment.cpp in Sources */,
 				15A3D9B01682F7F9002FB0C5 /* cpSpatialIndex.c in Sources */,
 				15A3D9B11682F7F9002FB0C5 /* cpSweep1D.c in Sources */,
 				15A3D9B21682F7F9002FB0C5 /* cpVect.c in Sources */,

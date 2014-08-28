@@ -8,6 +8,7 @@
 
 #include "Gaming.h"
 #include "Battle.h"
+#include "Equipment.h"
 
 bool Gaming::init(){
     bool sRect=false;
@@ -86,6 +87,15 @@ void Gaming::SetupViews(){
     enBar->setBarChangeRate(ccp(1, 0));
 //    enBar->setPercentage(100);
     this->addChild(enBar,50,31);
+    
+    //添加换装界面按钮
+    CCLabelBMFont* Equipments=CCLabelBMFont::create("Equipments", "myfont1.fnt");
+    CCMenuItemLabel* Equipmentsmenuitem=CCMenuItemLabel::create(Equipments, this, menu_selector(Gaming::EquipmentsMenucallback));
+    CCMenu* menu=CCMenu::create();
+    menu->addChild(Equipmentsmenuitem);
+    menu->setAnchorPoint(ccp(0.5, 0));
+    menu->setPosition(ccp(GetWinSize().width/3, 50));
+    this->addChild(menu);
 
 }
 
@@ -256,4 +266,8 @@ void Gaming::btlayerExitObserver(){
 void Gaming::refreshGameTimes(){
     CCLabelAtlas* gametimeslabel=(CCLabelAtlas*)this->getChildByTag(30);
     gametimeslabel->setString(Battle::IntToChar(ud->getGameTimes()));
+}
+
+void Gaming::EquipmentsMenucallback(cocos2d::CCObject *pSender){
+    CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f,Equipment::scene()));
 }
