@@ -21,6 +21,7 @@ public:
     static CCScene* scene();
     CREATE_FUNC(Status);
     virtual void draw();
+    virtual void onEnter();
     virtual void onExit();
     
     virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
@@ -30,7 +31,6 @@ private:
     UserData* ud;
     CCSize getWinsize();
     void setupViews();
-    virtual void onEnter();
 
     int sp;
     int HP;

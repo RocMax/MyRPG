@@ -21,13 +21,12 @@ public:
     virtual bool init();
     static CCScene* scene();
     CREATE_FUNC(Equipment);
-    
+    virtual void draw();
 private:
     UserData* ud;
-    virtual void onEnter();
     CCSize getWinsize();
     void setupViews();
-    virtual void draw();
+
 };
 
 

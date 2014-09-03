@@ -31,7 +31,6 @@ CCScene* Gaming::scene(){
 void Gaming::SetupViews(){
     ud=UserData::LoadUserData();
     ud->RefreshUserData();
-    ud->retain();
     
     CCLog("equipment:%s  bag:%s",USER_DEFAULT->getStringForKey("Equipments").c_str(),USER_DEFAULT->getStringForKey("EquipBag").c_str());
 
@@ -240,6 +239,7 @@ void Gaming::onEnter(){
 }
 
 void Gaming::onExit(){
+    ud->SaveUserData();
     CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, battlelayerexited);
     CCLayer::onExit();
     
@@ -269,5 +269,6 @@ void Gaming::refreshGameTimes(){
 }
 
 void Gaming::EquipmentsMenucallback(cocos2d::CCObject *pSender){
+//    ud->SaveUserData();
     CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f,Equipment::scene()));
 }

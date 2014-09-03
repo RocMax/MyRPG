@@ -277,7 +277,7 @@ void Status::labelchange(cocos2d::CCLabelAtlas *label, bool isadd){
 }
 
 void Status::onExit(){
-    buttomarray->autorelease();
+    buttomarray->release();
     this->unscheduleUpdate();
     CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
     CCLOG("Status Layer Exit");

@@ -9,16 +9,11 @@
 #include "UserData.h"
 
 
-
-
-
-
 static UserData* instance=NULL;
 
 UserData* UserData::LoadUserData(){
     if (!instance) {
         instance=new UserData();
-        instance->retain();
 
     }
     instance->setName(converstringtochar(USER_DEFAULT->getStringForKey("Name")));
@@ -52,6 +47,7 @@ UserData* UserData::LoadUserData(){
     instance->setEquipBag(convertchartodic(converstringtochar(USER_DEFAULT->getStringForKey("EquipBag"))));
     instance->setEquipments(convertchartodic(converstringtochar(USER_DEFAULT->getStringForKey("Equipments"))));
     
+
     return instance;
 }
 
@@ -152,13 +148,13 @@ string UserData::convertchartostring(char *c){
 //将字符串转化为存储装备属性的CCDictionary,key0-8分别表示武器,防具,饰品1-6
 CCDictionary* UserData::convertchartodic(char *c){
     CCDictionary* dic=CCDictionary::create();
+//    dic->retain();
     if (strcmp(c, "0")==0) {
         dic=NULL;
     }
     else{
         char* temp=strdup(c);
-        strsep(&temp, "0:");
-//        const char* delim=":";
+        strsep(&temp, ":");
         int i=0;
         do {
             int itemid=atoi(strsep(&temp, ":")) ;
@@ -166,11 +162,14 @@ CCDictionary* UserData::convertchartodic(char *c){
             dic->setObject(idata, i);
             i++;
         } while (temp!=NULL);
+        
     }
+    
     return dic;
 }
 
 char* UserData::convertdictochar(cocos2d::CCDictionary *d){
+    CCLog("retaincount:%d",d->retainCount());
     if (d!=NULL) {
         CCDictElement* pElement;
         CCString* str=CCString::createWithFormat("0");

@@ -14,6 +14,8 @@
 #include "ItemData.h"
 
 #define USER_DEFAULT CCUserDefault::sharedUserDefault()
+#define USER_DATA UserData::ShardUserData()
+ 
 #define SPEED_DEFAULT 10.0f
 
 #define EXP_POWER 1.14

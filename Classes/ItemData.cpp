@@ -9,11 +9,11 @@
 #include "ItemData.h"
 #include "DBOperations.h"
 
-ItemData* instance=NULL;
+static ItemData* item_instance=NULL;
 
 ItemData* ItemData::getItemData(int ItemID){
-    if (!instance) {
-        instance=new ItemData();
+    if (!item_instance) {
+        item_instance=new ItemData();
     }
     
     //读入对应ItemID的数据
@@ -30,32 +30,32 @@ ItemData* ItemData::getItemData(int ItemID){
     
     sqlite3_close(pDB);
     
-    return instance;
+    return item_instance;
 
     
 }
 
 int ItemData::sqlite_callback(void *pv, int column, char **dbResult, char **col){
-    instance->setItemName(dbResult[1]);
-    instance->setItemPic(dbResult[2]);
-    instance->setItemPrice(atoi(dbResult[3]));
-    instance->setEquipType(atoi(dbResult[4]));
-    instance->setisunique((bool)atoi(dbResult[5]));
-    instance->setItemHP(atof(dbResult[6]));
-    instance->setItemATK(atof(dbResult[7]));
-    instance->setItemDEF(atof(dbResult[8]));
-    instance->setItemAGI(atof(dbResult[9]));
-    instance->setItemLUK(atof(dbResult[10]));
-    instance->setWeaponATKRate(atof(dbResult[11]));
-    instance->setHPAbsorb(atof(dbResult[12]));
-    instance->setCriRate(atof(dbResult[13]));
-    instance->setCriDam(atof(dbResult[14]));
-    instance->setComboRate(atof(dbResult[15]));
-    instance->setEncounterRate(atof(dbResult[16]));
-    instance->setSpeedRate(atof(dbResult[17]));
-    instance->setLUKAddition(atof(dbResult[18]));
-    instance->setItemDropAddition(atof(dbResult[19]));
-    instance->setGoldDropAddition(atof(dbResult[20]));
+    item_instance->setItemName(dbResult[1]);
+    item_instance->setItemPic(dbResult[2]);
+    item_instance->setItemPrice(atoi(dbResult[3]));
+    item_instance->setEquipType(atoi(dbResult[4]));
+    item_instance->setisunique((bool)atoi(dbResult[5]));
+    item_instance->setItemHP(atof(dbResult[6]));
+    item_instance->setItemATK(atof(dbResult[7]));
+    item_instance->setItemDEF(atof(dbResult[8]));
+    item_instance->setItemAGI(atof(dbResult[9]));
+    item_instance->setItemLUK(atof(dbResult[10]));
+    item_instance->setWeaponATKRate(atof(dbResult[11]));
+    item_instance->setHPAbsorb(atof(dbResult[12]));
+    item_instance->setCriRate(atof(dbResult[13]));
+    item_instance->setCriDam(atof(dbResult[14]));
+    item_instance->setComboRate(atof(dbResult[15]));
+    item_instance->setEncounterRate(atof(dbResult[16]));
+    item_instance->setSpeedRate(atof(dbResult[17]));
+    item_instance->setLUKAddition(atof(dbResult[18]));
+    item_instance->setItemDropAddition(atof(dbResult[19]));
+    item_instance->setGoldDropAddition(atof(dbResult[20]));
     
     return 0;
 }

@@ -9,7 +9,7 @@
 #include "MonsterManager.h"
 
 
-MonsterManager* m_instance=NULL;
+static MonsterManager* m_instance=NULL;
 
 MonsterManager* MonsterManager::GetMonster(int MapArea){
     if (!m_instance) {

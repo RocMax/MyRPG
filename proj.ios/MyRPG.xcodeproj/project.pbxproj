@@ -276,6 +276,10 @@
 		E89FBF40198F769300DC4D5E /* BarBox.png in Resources */ = {isa = PBXBuildFile; fileRef = E89FBF3F198F769300DC4D5E /* BarBox.png */; };
 		E89FBF42198FA96100DC4D5E /* LevelUP.png in Resources */ = {isa = PBXBuildFile; fileRef = E89FBF41198FA96100DC4D5E /* LevelUP.png */; };
 		E8B3A3EB19AF0C2500244A65 /* Equipment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E8B3A3E919AF0C2500244A65 /* Equipment.cpp */; };
+		E8B3A3F219B0143600244A65 /* Accessory01.png in Resources */ = {isa = PBXBuildFile; fileRef = E8B3A3EE19B0143600244A65 /* Accessory01.png */; };
+		E8B3A3F319B0143600244A65 /* Armor01.png in Resources */ = {isa = PBXBuildFile; fileRef = E8B3A3EF19B0143600244A65 /* Armor01.png */; };
+		E8B3A3F419B0143600244A65 /* Empty.png in Resources */ = {isa = PBXBuildFile; fileRef = E8B3A3F019B0143600244A65 /* Empty.png */; };
+		E8B3A3F519B0143600244A65 /* Sword01.png in Resources */ = {isa = PBXBuildFile; fileRef = E8B3A3F119B0143600244A65 /* Sword01.png */; };
 		E8B5B7E719614BBC00612BCC /* cyclops_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = E8B5B7E619614BBC00612BCC /* cyclops_gray.png */; };
 		E8B5B7EC196150E300612BCC /* hobit_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = E8B5B7E8196150E300612BCC /* hobit_gray.png */; };
 		E8B5B7ED196150E300612BCC /* lizardman_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = E8B5B7E9196150E300612BCC /* lizardman_gray.png */; };
@@ -835,6 +839,10 @@
 		E89FBF41198FA96100DC4D5E /* LevelUP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LevelUP.png; sourceTree = "<group>"; };
 		E8B3A3E919AF0C2500244A65 /* Equipment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Equipment.cpp; path = ../Classes/Equipment.cpp; sourceTree = "<group>"; };
 		E8B3A3EA19AF0C2500244A65 /* Equipment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Equipment.h; path = ../Classes/Equipment.h; sourceTree = "<group>"; };
+		E8B3A3EE19B0143600244A65 /* Accessory01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Accessory01.png; sourceTree = "<group>"; };
+		E8B3A3EF19B0143600244A65 /* Armor01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Armor01.png; sourceTree = "<group>"; };
+		E8B3A3F019B0143600244A65 /* Empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Empty.png; sourceTree = "<group>"; };
+		E8B3A3F119B0143600244A65 /* Sword01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sword01.png; sourceTree = "<group>"; };
 		E8B5B7E619614BBC00612BCC /* cyclops_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cyclops_gray.png; sourceTree = "<group>"; };
 		E8B5B7E8196150E300612BCC /* hobit_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hobit_gray.png; sourceTree = "<group>"; };
 		E8B5B7E9196150E300612BCC /* lizardman_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lizardman_gray.png; sourceTree = "<group>"; };
@@ -1838,6 +1846,10 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E8B3A3EE19B0143600244A65 /* Accessory01.png */,
+				E8B3A3EF19B0143600244A65 /* Armor01.png */,
+				E8B3A3F019B0143600244A65 /* Empty.png */,
+				E8B3A3F119B0143600244A65 /* Sword01.png */,
 				E8050717199C9C6900098D8E /* whitebar.png */,
 				E8D8BB3C1995FA4C00C3E64A /* add.png */,
 				E8D8BB3D1995FA4C00C3E64A /* sub.png */,
@@ -2057,6 +2069,7 @@
 				E87E93FA1963C34A00E89661 /* edge.plist in Resources */,
 				D4EF949A15BD2D8B00D803EB /* Icon-57.png in Resources */,
 				E8F395FE197CEBFF00D90836 /* Monster1.png in Resources */,
+				E8B3A3F319B0143600244A65 /* Armor01.png in Resources */,
 				E89FBF3A198E6D3C00DC4D5E /* EXPbar.png in Resources */,
 				D4EF949C15BD2D8E00D803EB /* Icon-114.png in Resources */,
 				E8B5B7E719614BBC00612BCC /* cyclops_gray.png in Resources */,
@@ -2072,8 +2085,11 @@
 				E87E93F91963C34A00E89661 /* black.png in Resources */,
 				E89FBF40198F769300DC4D5E /* BarBox.png in Resources */,
 				E87E93FB1963C34A00E89661 /* edge.png in Resources */,
+				E8B3A3F519B0143600244A65 /* Sword01.png in Resources */,
+				E8B3A3F219B0143600244A65 /* Accessory01.png in Resources */,
 				E87E93FD1963C34A00E89661 /* Tiledmap.tmx in Resources */,
 				E8B5B7EC196150E300612BCC /* hobit_gray.png in Resources */,
+				E8B3A3F419B0143600244A65 /* Empty.png in Resources */,
 				D4EF94A015BD2D9800D803EB /* Icon-144.png in Resources */,
 				D41A0AD1160F154A004552AE /* Default-568h@2x.png in Resources */,
 				E8126AD51960FE1000FECCD0 /* data.db in Resources */,
