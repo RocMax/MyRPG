@@ -13,31 +13,14 @@
 #include "LevelUpEffect.h"
 #include "Status.h"
 
-Battle* Battle::createWithData(UserData *ud){
-    Battle* pRet=new Battle();
-    if (pRet&&pRet->initWithData(ud)) {
-        pRet->autorelease();
-        return pRet;
-    }
-    else{
-        CC_SAFE_DELETE(pRet);
-        return NULL;
-    }
-}
-
-
-bool Battle::initWithData(UserData *ud){
+bool Battle::init(){
     bool sRect=false;
     do {
         CC_BREAK_IF(!CCLayer::init());
-        setupViewsWithData(ud);
+        setupViews();
         sRect=true;
     } while (0);
     return sRect;
-    
-}
-
-Battle::~Battle(){
     
 }
 
@@ -45,8 +28,7 @@ CCSize Battle::GetWinSize(){
     return CCDirector::sharedDirector()->getWinSize();
 }
 
-void Battle::setupViewsWithData(UserData *ud){
-    userdata=ud;
+void Battle::setupViews(){
     blackbg=CCSprite::create("black.png");
     blackbg->setScale(1.3);
     blackbg->setAnchorPoint(ccp(0.5, 0.5));
@@ -54,12 +36,12 @@ void Battle::setupViewsWithData(UserData *ud){
     blackbg->setOpacity(255);
     this->addChild(blackbg);
     
-    player=CCSprite::create(ud->getPic());
+    player=CCSprite::create(USER_DATA->getPic());
     blackbg->addChild(player, 1, 11);
     player->setAnchorPoint(ccp(0.5, 0.5));
     player->setPosition(ccp(blackbg->getContentSize().width/2,blackbg->getContentSize().height/4));
     
-    pHP=userdata->getFinal_HP();
+    pHP=USER_DATA->getFinal_HP();
     //添加player血条
     CCSprite* pHPBarbg=CCSprite::create("BarBox.png");
     pHPBarbg->setAnchorPoint(ccp(0.5, 0.5));
@@ -77,7 +59,7 @@ void Battle::setupViewsWithData(UserData *ud){
     
     
     //获取Monster数据
-    mm=MonsterManager::GetMonster(ud->getMapArea());
+    mm=MonsterManager::GetMonster(USER_DATA->getMapArea());
     mm->retain();
 //    CCLOG(mm->getM_Pic());
     monster=CCSprite::create(mm->getM_Pic());
@@ -125,7 +107,7 @@ bool Battle::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent){
         isinbattle=true;
         isbattlepaused=false;
         isplayerfailed=false;
-        maxCombo_player=ComboCheck(userdata->getFinal_ComboRatio());
+        maxCombo_player=ComboCheck(USER_DATA->getFinal_ComboRatio());
         CCLOG("new maxCombo_player=%d",maxCombo_player);
         maxCombo_monster=ComboCheck(mm->getM_ComboRatio());
         //        CCLOG("new maxCombo_monster=%d",maxCombo_monster);
@@ -159,7 +141,7 @@ bool Battle::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent){
 
     //如果player loos，点击退出
     else if (isinbattle==false&&isbattlepaused==false&&isplayerfailed==true) {
-        userdata->SaveUserData();
+//        USER_DATA->SaveUserData();
         CCLog("结束画面,点击退出");
         const char*  battlelayerexited="BattleLayerExited";
         CCNotificationCenter::sharedNotificationCenter()->postNotification(battlelayerexited);
@@ -171,7 +153,7 @@ bool Battle::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent){
 }
 
 void Battle::onExit(){
-//    userdata->SaveUserData();
+//    USER_DATA->SaveUserData();
     CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
     CCLog("battle layer exited");
     CCLayer::onExit();
@@ -187,13 +169,13 @@ void Battle::setRandomSeed(){
 void Battle::PlayerAttack(){
     float damage;
     float criticaldamage;
-    bool isCritical=isCriticalHit(userdata->getFinal_CriticalRatio());
+    bool isCritical=isCriticalHit(USER_DATA->getFinal_CriticalRatio());
     
     //判断是否暴击
     if (isCritical) {
         //monster受到暴击的特效,暂时和不暴击一样
         AttackEffect::atkeffect()->attack(monster->getParent(), monster->getPosition());
-        criticaldamage=userdata->getFinal_CriticalDamage();
+        criticaldamage=USER_DATA->getFinal_CriticalDamage();
     }
     else {
         //monster受到普通攻击的特效
@@ -206,7 +188,7 @@ void Battle::PlayerAttack(){
     CCLog("player combo:%d",comboNO_player);
     
     //player对怪的伤害,计算公式:人对怪物伤害=攻击力*(1-伤害减免*级别差修正)*暴击倍率
-    damage=userdata->getFinal_ATK()*(1-mm->getM_DamageReduction()*levelCorrection(userdata->getLevel(), mm->getM_Level()))*criticaldamage;
+    damage=USER_DATA->getFinal_ATK()*(1-mm->getM_DamageReduction()*levelCorrection(USER_DATA->getLevel(), mm->getM_Level()))*criticaldamage;
     
     //monster扣血
     mHP-=damage;
@@ -244,7 +226,7 @@ void Battle::MonsterAttack(){
     comboNO_monster++;
     
     //计算伤害,公式为:怪物对人伤害=攻击力*(1-伤害减免*级别差修正)*暴击倍率
-    damage=mm->getM_ATK()*(1-userdata->getFinal_DamageReduction()*levelCorrection(mm->getM_Level(), userdata->getLevel()))*criticaldamage;
+    damage=mm->getM_ATK()*(1-USER_DATA->getFinal_DamageReduction()*levelCorrection(mm->getM_Level(), USER_DATA->getLevel()))*criticaldamage;
     
     //plaer扣血
     pHP-=damage;
@@ -254,7 +236,7 @@ void Battle::MonsterAttack(){
     DamageNumber::shareddamagenumber()->getDanageEffect(player, isCritical, damage);
     
     //修改player的HPbar
-    pHPBar->setPercentage(pHP/userdata->getFinal_HP()*100);
+    pHPBar->setPercentage(pHP/USER_DATA->getFinal_HP()*100);
     
     
 
@@ -273,7 +255,7 @@ void Battle::PlayerAttackCallBack(CCNode* pSender){
     }
     else {
         CCLOG("player wins");
-        userdata->setGameTimes(userdata->getGameTimes()-1);
+        USER_DATA->setGameTimes(USER_DATA->getGameTimes()-1);
         monster->stopAllActions();
         player->stopAllActions();
         //战斗结束
@@ -295,7 +277,7 @@ void Battle::MonsterAttackCallBack(CCNode* pSender){
     }
     else {
         CCLOG("Player loses");
-        userdata->setGameTimes(userdata->getGameTimes()-3);
+        USER_DATA->setGameTimes(USER_DATA->getGameTimes()-3);
         
         monster->stopAllActions();
         player->stopAllActions();
@@ -354,7 +336,7 @@ void Battle::finalview(bool isPlayerWins){
         
         //级别显示
         CCLabelBMFont* lvLabel=CCLabelBMFont::create("LEVEL :","myfont1.fnt");
-        lvNumber=CCLabelAtlas::create(IntToChar(userdata->getLevel()), "number.png", 24, 34, 48);
+        lvNumber=CCLabelAtlas::create(IntToChar(USER_DATA->getLevel()), "number.png", 24, 34, 48);
         lvLabel->setPosition(ccp(EXPLabel1->getPositionX(), EXPLabel1->getPositionY()-60));
         lvNumber->setPosition(ccp(blackbg->getContentSize().width/2, EXPLabel1->getPositionY()-75));
         blackbg->addChild(lvLabel);
@@ -372,12 +354,12 @@ void Battle::finalview(bool isPlayerWins){
         EXPBar->setPosition(ccp(blackbg->getContentSize().width/2,EXPLabel1->getPositionY()));
         EXPBar->setMidpoint(ccp(0, 0.5));
         EXPBar->setBarChangeRate(ccp(1, 0));
-        EXPBar->setPercentage(userdata->getEXP()/pow(userdata->getLevel(), EXP_POWER)*100);
+        EXPBar->setPercentage(USER_DATA->getEXP()/pow(USER_DATA->getLevel(), EXP_POWER)*100);
         blackbg->addChild(EXPBar);
-        EXPnow=userdata->getEXP();
+        EXPnow=USER_DATA->getEXP();
         //计算打怪所得经验,公式为:经验=怪物经验提供值*random(0.9,1.1)*(1+道具经验加成)
-        EXPadd=((float)mm->getM_Exp()*(CCRANDOM_0_1()*0.2+0.9)*(1+userdata->getFinal_ExpRate()));
-        EXPmax=pow(userdata->getLevel(), EXP_POWER)+99;
+        EXPadd=((float)mm->getM_Exp()*(CCRANDOM_0_1()*0.2+0.9)*(1+USER_DATA->getFinal_ExpRate()));
+        EXPmax=pow(USER_DATA->getLevel(), EXP_POWER)+99;
     
         LevelUp();
     }
@@ -419,18 +401,18 @@ bool Battle::LevelUpEXP(){
 
 void Battle::EXPBarcallbackLvUp(cocos2d::CCNode *pSender){
     EXPadd=EXPadd-(EXPmax-EXPnow);
-    userdata->setLevel(userdata->getLevel()+1);
+    USER_DATA->setLevel(USER_DATA->getLevel()+1);
     LevelUpEffect::sharedlevleupeffect()->levelup(player);
-    lvNumber->setString(IntToChar(userdata->getLevel()));
-    userdata->setSparePoint(userdata->getSparePoint()+userdata->getPointPerLevel());
-    EXPmax=pow(userdata->getLevel(), EXP_POWER)+99;
+    lvNumber->setString(IntToChar(USER_DATA->getLevel()));
+    USER_DATA->setSparePoint(USER_DATA->getSparePoint()+USER_DATA->getPointPerLevel());
+    EXPmax=pow(USER_DATA->getLevel(), EXP_POWER)+99;
     EXPnow=0;
     LevelUp();
 }
 void Battle::EXPBarcallbackLv(cocos2d::CCNode *pSender){
     EXPnow+=EXPadd;
     EXPadd=0;
-    userdata->setEXP(EXPnow);
+    USER_DATA->setEXP(EXPnow);
     CCLabelBMFont* labelmap=CCLabelBMFont::create("MAP", "myfont1.fnt");
     CCLabelBMFont* labelstatus=CCLabelBMFont::create("STATUS", "myfont1.fnt");
     CCMenuItemLabel* clicktomap=CCMenuItemLabel::create(labelmap, this, menu_selector(Battle::menucallback));
@@ -448,7 +430,7 @@ void Battle::EXPBarcallbackLv(cocos2d::CCNode *pSender){
 
 void Battle::menucallback(cocos2d::CCObject *pSender){
     CCLog("equip:%s   Bag:%s",USER_DEFAULT->getStringForKey("Equipments").c_str(),USER_DEFAULT->getStringForKey("EquipBag").c_str());
-    userdata->SaveUserData();
+//    USER_DATA->SaveUserData();
     int tag=((CCMenuItemLabel*)pSender)->getTag();
     if (tag==42) {
         CCDirector::sharedDirector()->pushScene(Status::scene());

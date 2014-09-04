@@ -21,17 +21,18 @@ bool Status::init(){
     bool sRect=false;
     do {
         CC_BREAK_IF(!CCLayer::init());
-        ud=UserData::LoadUserData();
+//        USER_DATA->LoadUserData();
 //        CCLog("equip:%s   Bag:%s",USER_DEFAULT->getStringForKey("Equipments").c_str(),USER_DEFAULT->getStringForKey("EquipBag").c_str());
+        setupViews();
         sRect=true;
     } while (0);
     return sRect;
 }
 
-void Status::onEnter(){
-    CCLayer::onEnter();
-    setupViews();
-}
+//void Status::onEnter(){
+//    CCLayer::onEnter();
+//    setupViews();
+//}
 
 void Status::draw(){
     CCSize winsize=CCDirector::sharedDirector()->getWinSize();
@@ -45,19 +46,19 @@ CCSize Status::getWinsize(){
 
 
 void  Status::setupViews(){
-    sp=ud->getSparePoint();
-    HP=(int)ud->getHP();
-    ATK=(int)ud->getATK();
-    DEF=(int)ud->getDEF();
-    AGI=(int)ud->getAGI();
-    LUK=(int)ud->getLUK();
+    sp=USER_DATA->getSparePoint();
+    HP=(int)USER_DATA->getHP();
+    ATK=(int)USER_DATA->getATK();
+    DEF=(int)USER_DATA->getDEF();
+    AGI=(int)USER_DATA->getAGI();
+    LUK=(int)USER_DATA->getLUK();
     
-    CCSprite* player=CCSprite::create(ud->getPic());
+    CCSprite* player=CCSprite::create(USER_DATA->getPic());
     player->setPosition(ccp(player->getContentSize().width/2+50, getWinsize().height-player->getContentSize().height/2-100));
     player->setScale(2.0f);
     this->addChild(player);
     
-    CCString* stringlevel=CCString::createWithFormat("LEVEL :%d",ud->getLevel());
+    CCString* stringlevel=CCString::createWithFormat("LEVEL :%d",USER_DATA->getLevel());
     CCLabelBMFont* level=CCLabelBMFont::create(stringlevel->getCString(), "myfont1.fnt");
     level->setPosition(ccp(getWinsize().width/2+30, getWinsize().height-100));
     this->addChild(level);
@@ -155,14 +156,14 @@ void  Status::setupViews(){
 }
 
 void Status::okmeuncallback(cocos2d::CCNode *pSender){
-    ud->setSparePoint(atoi(sparepoint->getString()));
-    ud->setHP(atof(statunum1->getString()));
-    ud->setATK(atof(statunum2->getString()));
-    ud->setDEF(atof(statunum3->getString()));
-    ud->setAGI(atof(statunum4->getString()));
-    ud->setLUK(atof(statunum5->getString()));
-    ud->SaveUserData();
-    ud->RefreshUserData();
+    USER_DATA->setSparePoint(atoi(sparepoint->getString()));
+    USER_DATA->setHP(atof(statunum1->getString()));
+    USER_DATA->setATK(atof(statunum2->getString()));
+    USER_DATA->setDEF(atof(statunum3->getString()));
+    USER_DATA->setAGI(atof(statunum4->getString()));
+    USER_DATA->setLUK(atof(statunum5->getString()));
+//    USER_DATA->SaveUserData();
+    USER_DATA->RefreshUserData();
     CCDirector::sharedDirector()->popScene();
 }
 void Status::canclemenucallback(cocos2d::CCNode *pSender){

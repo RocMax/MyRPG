@@ -1942,9 +1942,9 @@
 			isa = PBXGroup;
 			children = (
 				E8126AE019610CD500FECCD0 /* SelectHero.cpp */,
+				E8126AE119610CD500FECCD0 /* SelectHero.h */,
 				E87D367D1966F2B8000C453C /* Gaming.cpp */,
 				E87D367E1966F2B8000C453C /* Gaming.h */,
-				E8126AE119610CD500FECCD0 /* SelectHero.h */,
 				E8F395E9197AA0DA00D90836 /* Battle.cpp */,
 				E8F395EA197AA0DA00D90836 /* Battle.h */,
 				E88DD3EB1982019A000F601F /* Start.cpp */,

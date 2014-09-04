@@ -14,7 +14,7 @@
 #include "ItemData.h"
 
 #define USER_DEFAULT CCUserDefault::sharedUserDefault()
-#define USER_DATA UserData::ShardUserData()
+#define USER_DATA UserData::SharedUserData()
  
 #define SPEED_DEFAULT 10.0f
 
@@ -108,7 +108,8 @@ class UserData:public CCObject{
 
     
 public:
-    static UserData* LoadUserData();
+    static UserData* SharedUserData();
+    static void LoadUserData();
     static void SaveUserData();
     
     static void RefreshUserData();

@@ -29,20 +29,22 @@ CCScene* Gaming::scene(){
 }
 
 void Gaming::SetupViews(){
-    ud=UserData::LoadUserData();
-    ud->RefreshUserData();
+//    ud=UserData::LoadUserData();
+//    ud->RefreshUserData();
+    USER_DATA->LoadUserData();
+    USER_DATA->RefreshUserData();
     
     CCLog("equipment:%s  bag:%s",USER_DEFAULT->getStringForKey("Equipments").c_str(),USER_DEFAULT->getStringForKey("EquipBag").c_str());
 
     //生成地图
-    tiledMap=CCTMXTiledMap::create(ud->getMap());
+    tiledMap=CCTMXTiledMap::create(USER_DATA->getMap());
     tiledMap->setAnchorPoint(CCPointZero);
-    tiledMap->setPosition(ccp(ud->getMapOffsetX(), ud->getMapOffsetY()));
+    tiledMap->setPosition(ccp(USER_DATA->getMapOffsetX(), USER_DATA->getMapOffsetY()));
     this->addChild(tiledMap);
     //生成player
-    player=CCSprite::create(ud->getPic());
+    player=CCSprite::create(USER_DATA->getPic());
     player->setScale(0.5f);
-    player->setPosition(ccp(ud->getPositionX(), ud->getPositionY()));
+    player->setPosition(ccp(USER_DATA->getPositionX(), USER_DATA->getPositionY()));
     tiledMap->addChild(player,10);
     //获取meta层
     metaLayer=tiledMap->layerNamed("Meta");
@@ -59,7 +61,7 @@ void Gaming::SetupViews(){
     
     //初始化遇怪数值
     Battle::setRandomSeed();
-    EncounterNum=(CCRANDOM_0_1()*100)*(1+ud->getFinal_EncounterRate());
+    EncounterNum=(CCRANDOM_0_1()*100)*(1+USER_DATA->getFinal_EncounterRate());
     CCLog("encounternum=%f",EncounterNum);
     
     //GameTimes
@@ -67,7 +69,7 @@ void Gaming::SetupViews(){
     Gametimeslable->setAnchorPoint(ccp(1, 1));
     Gametimeslable->setPosition(ccp(GetWinSize().width-100, GetWinSize().height-20));
     this->addChild(Gametimeslable);
-    CCLabelAtlas* Gametimesnum=CCLabelAtlas::create(Battle::IntToChar( ud->getGameTimes()), "number.png", 24, 34, 48);
+    CCLabelAtlas* Gametimesnum=CCLabelAtlas::create(Battle::IntToChar( USER_DATA->getGameTimes()), "number.png", 24, 34, 48);
     Gametimesnum->setAnchorPoint(ccp(0, 1));
     Gametimesnum->setPosition(ccp(Gametimeslable->getPositionX()+20, Gametimeslable->getPositionY()-20));
     this->addChild(Gametimesnum,50,30);
@@ -153,7 +155,7 @@ CCPoint Gaming::getOffset(CCPoint viewPoint){
 //移动Player
 void Gaming::movePlayer(CCPoint targetpos,float t){
     CCPoint curpos=ccpAdd(player->getPosition(), getOffset(player->getPosition()));
-    float speed=ud->getFinal_MoveSpeed();
+    float speed=USER_DATA->getFinal_MoveSpeed();
     if (ccpDistance(curpos, targetpos)>speed) {
         CCPoint normvector=ccpNormalize(ccp(targetpos.x-curpos.x, targetpos.y-curpos.y));
         CCPoint nextposition=ccpSub(ccp(curpos.x+normvector.x*speed, curpos.y+normvector.y*speed), getOffset(player->getPosition()));
@@ -161,7 +163,7 @@ void Gaming::movePlayer(CCPoint targetpos,float t){
         
         if (isReachable(nextTiledCoord)) {
             player->setPosition(nextposition);
-            ud->setMapArea(getMapLevel(nextTiledCoord));
+            USER_DATA->setMapArea(getMapLevel(nextTiledCoord));
         }
 
         
@@ -218,7 +220,7 @@ void Gaming::EncounterMonster(float t){
         if (EncounterNum<=0) {
             this->pauseSchedulerAndActions();
             //添加battle层
-            Battle* btlayer=Battle::createWithData(ud);
+            Battle* btlayer=Battle::create();
             this->addChild(btlayer, 50, 11);
             btlayer->ignoreAnchorPointForPosition(false);
             btlayer->setAnchorPoint(ccp(0.5,0.5));
@@ -239,7 +241,7 @@ void Gaming::onEnter(){
 }
 
 void Gaming::onExit(){
-    ud->SaveUserData();
+//    USER_DATA->SaveUserData();
     CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, battlelayerexited);
     CCLayer::onExit();
     
@@ -251,10 +253,10 @@ void Gaming::btlayerExitObserver(){
     }
     
     //刷新userdata
-    ud=UserData::LoadUserData();
-    ud->RefreshUserData();
+//    USER_DATA->LoadUserData();
+    USER_DATA->RefreshUserData();
     refreshGameTimes();
-    EncounterNum=(CCRANDOM_0_1()*100)*(1+ud->getFinal_EncounterRate());
+    EncounterNum=(CCRANDOM_0_1()*100)*(1+USER_DATA->getFinal_EncounterRate());
     CCLOG("new encounternum=%f",EncounterNum);
     this->resumeSchedulerAndActions();
     CCProgressTimer* enbar=(CCProgressTimer*)this->getChildByTag(31);
@@ -265,10 +267,10 @@ void Gaming::btlayerExitObserver(){
 
 void Gaming::refreshGameTimes(){
     CCLabelAtlas* gametimeslabel=(CCLabelAtlas*)this->getChildByTag(30);
-    gametimeslabel->setString(Battle::IntToChar(ud->getGameTimes()));
+    gametimeslabel->setString(Battle::IntToChar(USER_DATA->getGameTimes()));
 }
 
 void Gaming::EquipmentsMenucallback(cocos2d::CCObject *pSender){
-//    ud->SaveUserData();
+//    USER_DATA->SaveUserData();
     CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f,Equipment::scene()));
 }

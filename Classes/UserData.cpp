@@ -11,11 +11,16 @@
 
 static UserData* instance=NULL;
 
-UserData* UserData::LoadUserData(){
+UserData* UserData::SharedUserData(){
     if (!instance) {
         instance=new UserData();
 
     }
+    
+    return instance;
+}
+
+void UserData::LoadUserData(){
     instance->setName(converstringtochar(USER_DEFAULT->getStringForKey("Name")));
     instance->setPic(converstringtochar(USER_DEFAULT->getStringForKey("Pic")));
     instance->setLevel(USER_DEFAULT->getIntegerForKey("Level"));
@@ -36,7 +41,7 @@ UserData* UserData::LoadUserData(){
     
     instance->setPointPerLevel(USER_DEFAULT->getIntegerForKey("PointPerLevel"));
     instance->setSparePoint(USER_DEFAULT->getIntegerForKey("SparePoint"));
-
+    
     instance->setMap(converstringtochar(USER_DEFAULT->getStringForKey("Map")));
     instance->setMapOffsetX(USER_DEFAULT->getIntegerForKey("MapOffsetX"));
     instance->setMapOffsetY(USER_DEFAULT->getIntegerForKey("MapOffsetY"));
@@ -46,11 +51,7 @@ UserData* UserData::LoadUserData(){
     
     instance->setEquipBag(convertchartodic(converstringtochar(USER_DEFAULT->getStringForKey("EquipBag"))));
     instance->setEquipments(convertchartodic(converstringtochar(USER_DEFAULT->getStringForKey("Equipments"))));
-    
-
-    return instance;
 }
-
 
 
 void UserData::SaveUserData(){

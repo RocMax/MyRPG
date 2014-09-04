@@ -23,7 +23,6 @@ public:
     CREATE_FUNC(Equipment);
     virtual void draw();
 private:
-    UserData* ud;
     CCSize getWinsize();
     void setupViews();
 

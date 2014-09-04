@@ -21,7 +21,7 @@ public:
     static CCScene* scene();
     CREATE_FUNC(Status);
     virtual void draw();
-    virtual void onEnter();
+//    virtual void onEnter();
     virtual void onExit();
     
     virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);

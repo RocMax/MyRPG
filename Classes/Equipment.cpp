@@ -40,9 +40,7 @@ void Equipment::draw(){
 
 
 void Equipment::setupViews(){
-    ud=UserData::LoadUserData();
-    CCLog("retain count:%d",ud->retainCount());
-    CCSprite* player=CCSprite::create(ud->getPic());
+    CCSprite* player=CCSprite::create(USER_DATA->getPic());
     player->setAnchorPoint(ccp(0,1));
     player->setPosition(ccp(0, getWinsize().height-150));
     player->setScale(2.0f);
@@ -52,11 +50,8 @@ void Equipment::setupViews(){
     CCArray* equipmentsarray=CCArray::create();
     equipmentsarray->retain();
     
-    CCDictionary* equipdic=ud->getEquipments();
-    CCLog("retain count:%d",equipdic->retainCount());
-    CCLog("itemid=%d",((ItemData*)equipdic->objectForKey(0))->getItemID());
+    CCDictionary* equipdic=USER_DATA->getEquipments();
     CCDictElement* pelement;
-
     CCDICT_FOREACH(equipdic, pelement){
         ItemData* item=(ItemData*)pelement->getObject();
         CCLog("pic name:%s",item->getItemPic());
@@ -65,6 +60,7 @@ void Equipment::setupViews(){
         sprite->setPosition(ccp(getWinsize().width/3+50, getWinsize().height-100-pelement->getIntKey()*50));
         this->addChild(sprite);
     }
+    
 //    for (int i=0; i!=8; i++) {
 //        ItemData* item=(ItemData*)equipdic->objectForKey(i);
 //        CCSprite* sprite=CCSprite::create(item->getItemPic());

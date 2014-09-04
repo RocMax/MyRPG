@@ -19,17 +19,14 @@ USING_NS_CC;
 
 class Battle:public CCLayer{
 public:
-    static Battle* createWithData(UserData* ud);
-    virtual bool initWithData(UserData* ud);
-    virtual ~Battle();
-    
+    CREATE_FUNC(Battle);
+    virtual bool init();
     virtual void onExit();
     static void setRandomSeed();
     static const char* IntToChar(int num);
 private:
     CCSprite* blackbg;
     MonsterManager* mm;
-    UserData* userdata;
     CCSprite* player;
     CCSprite* monster;
     
@@ -58,7 +55,7 @@ private:
     bool isCriticalHit(float CriticalRatio);
     
     float levelCorrection(int AtkLevel,int DefLevel);
-    void setupViewsWithData(UserData* ud);
+    void setupViews();
     void finalview(bool isPlayerWins);
     
     int EXPnow;
