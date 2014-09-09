@@ -28,6 +28,7 @@ ItemData* ItemData::getItemData(int ItemID){
     }
     
     sqlite3_close(pDB);
+    
     CCLOG("itemname:%s",item->getItemName());
     CCLOG("item retaincount:%d",item->retainCount());
 
@@ -38,9 +39,9 @@ ItemData* ItemData::getItemData(int ItemID){
 
 int ItemData::sqlite_callback(void *pv, int column, char **dbResult, char **col){
     ItemData* pitem=(ItemData*)pv;
-
-    pitem->setItemName(dbResult[1]);
-    pitem->setItemPic(dbResult[2]);
+    
+    pitem->setItemName(strdup(dbResult[1]));
+    pitem->setItemPic(strdup(dbResult[2]));
     pitem->setItemPrice(atoi(dbResult[3]));
     pitem->setEquipType(atoi(dbResult[4]));
     pitem->setisunique((bool)atoi(dbResult[5]));
