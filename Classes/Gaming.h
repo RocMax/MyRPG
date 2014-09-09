@@ -36,7 +36,6 @@ public:
     void onExit();
     void btlayerExitObserver();
     const char*  battlelayerexited;
-    CC_SYNTHESIZE(UserData*, ud, ud);
 
     void refreshGameTimes();
     

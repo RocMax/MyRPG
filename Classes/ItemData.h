@@ -2,7 +2,7 @@
 //  ItemData.h
 //  MyRPG
 //
-//  Created by RocLee on 14-8-18.
+//  Created by RocLee on 14-9-4.
 //
 //
 
@@ -37,7 +37,7 @@ class ItemData:public CCObject{
     CC_SYNTHESIZE(float, ItemDropAddition, ItemDropAddition);
     CC_SYNTHESIZE(float, GoldDropAddition, GoldDropAddition)
     CC_SYNTHESIZE(float, ExpRate, ExpRate);
-
+    
     //属性枚举
     enum enumStatu{eItemHP,eItemATK,eItemDEF,eItemAGI,eItemLUK,eWeaponATKRate,eHPAbsorb,eCriRate,eCriDam,eComboRate,eEncounterRate,eSpeedRate,eLUKAddition,eItemDropAddition,eGoldDropAddition,eExpRate};
     typedef float (ItemData::*pGet) () const;

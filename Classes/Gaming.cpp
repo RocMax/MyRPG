@@ -29,8 +29,6 @@ CCScene* Gaming::scene(){
 }
 
 void Gaming::SetupViews(){
-//    ud=UserData::LoadUserData();
-//    ud->RefreshUserData();
     USER_DATA->LoadUserData();
     USER_DATA->RefreshUserData();
     

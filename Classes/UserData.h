@@ -109,16 +109,16 @@ class UserData:public CCObject{
     
 public:
     static UserData* SharedUserData();
-    static void LoadUserData();
-    static void SaveUserData();
+    void LoadUserData();
+    void SaveUserData();
     
-    static void RefreshUserData();
+    void RefreshUserData();
     
-    static char* converstringtochar(string s);
-    static string convertchartostring(char* c);
+    char* converstringtochar(string s);
+    string convertchartostring(char* c);
     
-    static CCDictionary* convertchartodic(char* c);
-    static char* convertdictochar(CCDictionary* d);
+    static void convertchartodic(char* c,CCDictionary* d);
+    static void convertdictochar(CCDictionary* d,char* c);
     
 private:
     float equpmentsaddup(ItemData::enumStatu statuID);

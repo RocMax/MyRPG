@@ -251,7 +251,6 @@
 		E8126ADD19610BF500FECCD0 /* manticore.png in Resources */ = {isa = PBXBuildFile; fileRef = E8126AD919610BF500FECCD0 /* manticore.png */; };
 		E8126ADF19610C9C00FECCD0 /* spector.png in Resources */ = {isa = PBXBuildFile; fileRef = E8126ADE19610C9C00FECCD0 /* spector.png */; };
 		E8126AE219610CD500FECCD0 /* SelectHero.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E8126AE019610CD500FECCD0 /* SelectHero.cpp */; };
-		E84FD50819A22CAA004C99E9 /* ItemData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E84FD50619A22CAA004C99E9 /* ItemData.cpp */; };
 		E874123F198A31E60022BF5F /* MonsterManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E874123E198A31E60022BF5F /* MonsterManager.cpp */; };
 		E8741242198B7E540022BF5F /* HPbar.png in Resources */ = {isa = PBXBuildFile; fileRef = E8741241198B7E540022BF5F /* HPbar.png */; };
 		E87D367F1966F2B8000C453C /* Gaming.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E87D367D1966F2B8000C453C /* Gaming.cpp */; };
@@ -290,6 +289,7 @@
 		E8B5B7FF19625CED00612BCC /* myfont1.png in Resources */ = {isa = PBXBuildFile; fileRef = E8B5B7FD19625CED00612BCC /* myfont1.png */; };
 		E8D8BB3E1995FA4C00C3E64A /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = E8D8BB3C1995FA4C00C3E64A /* add.png */; };
 		E8D8BB3F1995FA4C00C3E64A /* sub.png in Resources */ = {isa = PBXBuildFile; fileRef = E8D8BB3D1995FA4C00C3E64A /* sub.png */; };
+		E8DECEF619B7F98C0055934B /* ItemData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E8DECEF419B7F98C0055934B /* ItemData.cpp */; };
 		E8ED1EF81998997000CC6BFC /* Status.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E8ED1EF61998997000CC6BFC /* Status.cpp */; };
 		E8EEC090195BDC680089D564 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = E8EEC08E195BDC680089D564 /* menu.png */; };
 		E8EEC091195BDC680089D564 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = E8EEC08F195BDC680089D564 /* pause.png */; };
@@ -804,8 +804,6 @@
 		E8126ADE19610C9C00FECCD0 /* spector.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spector.png; sourceTree = "<group>"; };
 		E8126AE019610CD500FECCD0 /* SelectHero.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SelectHero.cpp; path = ../Classes/SelectHero.cpp; sourceTree = "<group>"; };
 		E8126AE119610CD500FECCD0 /* SelectHero.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectHero.h; path = ../Classes/SelectHero.h; sourceTree = "<group>"; };
-		E84FD50619A22CAA004C99E9 /* ItemData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ItemData.cpp; path = ../Classes/ItemData.cpp; sourceTree = "<group>"; };
-		E84FD50719A22CAA004C99E9 /* ItemData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemData.h; path = ../Classes/ItemData.h; sourceTree = "<group>"; };
 		E874123E198A31E60022BF5F /* MonsterManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MonsterManager.cpp; sourceTree = "<group>"; };
 		E8741241198B7E540022BF5F /* HPbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HPbar.png; sourceTree = "<group>"; };
 		E87D367D1966F2B8000C453C /* Gaming.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Gaming.cpp; path = ../Classes/Gaming.cpp; sourceTree = "<group>"; };
@@ -854,6 +852,8 @@
 		E8B5B7FD19625CED00612BCC /* myfont1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myfont1.png; sourceTree = "<group>"; };
 		E8D8BB3C1995FA4C00C3E64A /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		E8D8BB3D1995FA4C00C3E64A /* sub.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sub.png; sourceTree = "<group>"; };
+		E8DECEF419B7F98C0055934B /* ItemData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ItemData.cpp; path = ../Classes/ItemData.cpp; sourceTree = "<group>"; };
+		E8DECEF519B7F98C0055934B /* ItemData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemData.h; path = ../Classes/ItemData.h; sourceTree = "<group>"; };
 		E8ED1EF61998997000CC6BFC /* Status.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Status.cpp; path = ../Classes/Status.cpp; sourceTree = "<group>"; };
 		E8ED1EF71998997000CC6BFC /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Status.h; path = ../Classes/Status.h; sourceTree = "<group>"; };
 		E8EEC08E195BDC680089D564 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
@@ -1923,8 +1923,8 @@
 				E80FFF1019663FF2001DBCC1 /* UserData.h */,
 				E874123E198A31E60022BF5F /* MonsterManager.cpp */,
 				E89F81E8196BE0AA007417F8 /* MonsterManager.h */,
-				E84FD50619A22CAA004C99E9 /* ItemData.cpp */,
-				E84FD50719A22CAA004C99E9 /* ItemData.h */,
+				E8DECEF419B7F98C0055934B /* ItemData.cpp */,
+				E8DECEF519B7F98C0055934B /* ItemData.h */,
 			);
 			name = Characters;
 			sourceTree = "<group>";
@@ -2214,6 +2214,7 @@
 				15A3DA351682F826002FB0C5 /* CCBSequence.cpp in Sources */,
 				15A3DA361682F826002FB0C5 /* CCBSequenceProperty.cpp in Sources */,
 				46513EB1187BFBA200B5ABE1 /* UITouchGroup.cpp in Sources */,
+				E8DECEF619B7F98C0055934B /* ItemData.cpp in Sources */,
 				15A3DA371682F826002FB0C5 /* CCBValue.cpp in Sources */,
 				15A3DA381682F826002FB0C5 /* CCControlButtonLoader.cpp in Sources */,
 				E8ED1EF81998997000CC6BFC /* Status.cpp in Sources */,
@@ -2266,7 +2267,6 @@
 				15A3DAEE1682F8A6002FB0C5 /* SimpleAudioEngine.mm in Sources */,
 				15A3DAEF1682F8A6002FB0C5 /* SimpleAudioEngine_objc.m in Sources */,
 				1A27573F1697CF2B00504026 /* CCEditBoxImplAndroid.cpp in Sources */,
-				E84FD50819A22CAA004C99E9 /* ItemData.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				1AFAF8B816D35DE700DB1158 /* HelloWorldScene.cpp in Sources */,
 				1AC3624916D4A1E8000847F2 /* AppController.mm in Sources */,

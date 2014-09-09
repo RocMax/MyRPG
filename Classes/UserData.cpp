@@ -48,9 +48,15 @@ void UserData::LoadUserData(){
     instance->setPositionX(USER_DEFAULT->getIntegerForKey("PositionX"));
     instance->setPositionY(USER_DEFAULT->getIntegerForKey("PositionY"));
     instance->setMapArea(USER_DEFAULT->getIntegerForKey("MapArea"));
-    
-    instance->setEquipBag(convertchartodic(converstringtochar(USER_DEFAULT->getStringForKey("EquipBag"))));
-    instance->setEquipments(convertchartodic(converstringtochar(USER_DEFAULT->getStringForKey("Equipments"))));
+    CCDictionary* dictemp=CCDictionary::create();
+    convertchartodic(converstringtochar(USER_DEFAULT->getStringForKey("EquipBag")),dictemp);
+    instance->setEquipBag(dictemp);
+    EquipBag->retain();
+    dictemp->removeAllObjects();
+    convertchartodic(converstringtochar(USER_DEFAULT->getStringForKey("Equipments")),dictemp);
+    instance->setEquipments(dictemp);
+    Equipments->retain();
+    dictemp->release();
 }
 
 
@@ -87,8 +93,11 @@ void UserData::SaveUserData(){
         USER_DEFAULT->setIntegerForKey("MapArea", instance->getMapArea());
         
         //存储装备和包裹的字符串
-        USER_DEFAULT->setStringForKey("EquipBag", convertdictochar(instance->getEquipBag()));
-        USER_DEFAULT->setStringForKey("Equipments", convertdictochar(instance->getEquipments()));
+        char* temp;
+        convertdictochar(instance->getEquipBag(),temp);
+        USER_DEFAULT->setStringForKey("EquipBag", temp);
+        convertdictochar(instance->getEquipments(),temp);
+        USER_DEFAULT->setStringForKey("Equipments", temp);
         
         USER_DEFAULT->flush();
         
@@ -147,11 +156,10 @@ string UserData::convertchartostring(char *c){
 
 
 //将字符串转化为存储装备属性的CCDictionary,key0-8分别表示武器,防具,饰品1-6
-CCDictionary* UserData::convertchartodic(char *c){
-    CCDictionary* dic=CCDictionary::create();
-//    dic->retain();
+void UserData::convertchartodic(char *c,CCDictionary* d){
+
     if (strcmp(c, "0")==0) {
-        dic=NULL;
+        d=NULL;
     }
     else{
         char* temp=strdup(c);
@@ -160,17 +168,15 @@ CCDictionary* UserData::convertchartodic(char *c){
         do {
             int itemid=atoi(strsep(&temp, ":")) ;
             ItemData* idata=ItemData::getItemData(itemid);
-            dic->setObject(idata, i);
+            d->setObject(idata, i);
             i++;
         } while (temp!=NULL);
         
     }
     
-    return dic;
 }
 
-char* UserData::convertdictochar(cocos2d::CCDictionary *d){
-    CCLog("retaincount:%d",d->retainCount());
+void UserData::convertdictochar(cocos2d::CCDictionary *d,char*c){
     if (d!=NULL) {
         CCDictElement* pElement;
         CCString* str=CCString::createWithFormat("0");
@@ -183,10 +189,10 @@ char* UserData::convertdictochar(cocos2d::CCDictionary *d){
         }
         //        char* temp=strdup(str->getCString());
         //        strsep(&temp, ":");   //切掉开头多余的":"
-        return strdup(str->getCString());
+        c=strdup(str->getCString());
     }
     else{
-        return strdup("0") ;
+        c=strdup("0") ;
     }
 }
 

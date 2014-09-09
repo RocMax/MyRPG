@@ -40,6 +40,7 @@ void Equipment::draw(){
 
 
 void Equipment::setupViews(){
+//    USER_DATA->RefreshUserData();
     CCSprite* player=CCSprite::create(USER_DATA->getPic());
     player->setAnchorPoint(ccp(0,1));
     player->setPosition(ccp(0, getWinsize().height-150));

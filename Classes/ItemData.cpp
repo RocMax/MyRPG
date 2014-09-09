@@ -2,60 +2,64 @@
 //  ItemData.cpp
 //  MyRPG
 //
-//  Created by RocLee on 14-8-18.
+//  Created by RocLee on 14-9-4.
 //
 //
 
 #include "ItemData.h"
 #include "DBOperations.h"
 
-static ItemData* item_instance=NULL;
+
 
 ItemData* ItemData::getItemData(int ItemID){
-    if (!item_instance) {
-        item_instance=new ItemData();
-    }
-    
+    ItemData* item=new ItemData();
+    item->setItemID(ItemID);
+//    item->autorelease();
     //读入对应ItemID的数据
     char* errorMsg;
     //读取数据库
     sqlite3* pDB=DBOperation::openDB();
     CCString* sqlcs=CCString::createWithFormat("select * from Item where ID=%d",ItemID);
     const char* sql=sqlcs->getCString();
-    CCLog(sql);
-    int result=sqlite3_exec(pDB, sql, sqlite_callback, NULL, &errorMsg);
+    CCLOG(sql);
+    int result=sqlite3_exec(pDB, sql, sqlite_callback,item,&errorMsg);
     if (result!=SQLITE_OK) {
-        CCLog(errorMsg);
+        CCLOG(errorMsg);
     }
     
     sqlite3_close(pDB);
-    
-    return item_instance;
+    CCLOG("itemname:%s",item->getItemName());
+    CCLOG("item retaincount:%d",item->retainCount());
 
+
+    return item;
     
 }
 
 int ItemData::sqlite_callback(void *pv, int column, char **dbResult, char **col){
-    item_instance->setItemName(dbResult[1]);
-    item_instance->setItemPic(dbResult[2]);
-    item_instance->setItemPrice(atoi(dbResult[3]));
-    item_instance->setEquipType(atoi(dbResult[4]));
-    item_instance->setisunique((bool)atoi(dbResult[5]));
-    item_instance->setItemHP(atof(dbResult[6]));
-    item_instance->setItemATK(atof(dbResult[7]));
-    item_instance->setItemDEF(atof(dbResult[8]));
-    item_instance->setItemAGI(atof(dbResult[9]));
-    item_instance->setItemLUK(atof(dbResult[10]));
-    item_instance->setWeaponATKRate(atof(dbResult[11]));
-    item_instance->setHPAbsorb(atof(dbResult[12]));
-    item_instance->setCriRate(atof(dbResult[13]));
-    item_instance->setCriDam(atof(dbResult[14]));
-    item_instance->setComboRate(atof(dbResult[15]));
-    item_instance->setEncounterRate(atof(dbResult[16]));
-    item_instance->setSpeedRate(atof(dbResult[17]));
-    item_instance->setLUKAddition(atof(dbResult[18]));
-    item_instance->setItemDropAddition(atof(dbResult[19]));
-    item_instance->setGoldDropAddition(atof(dbResult[20]));
+    ItemData* pitem=(ItemData*)pv;
+
+    pitem->setItemName(dbResult[1]);
+    pitem->setItemPic(dbResult[2]);
+    pitem->setItemPrice(atoi(dbResult[3]));
+    pitem->setEquipType(atoi(dbResult[4]));
+    pitem->setisunique((bool)atoi(dbResult[5]));
+    pitem->setItemHP(atof(dbResult[6]));
+    pitem->setItemATK(atof(dbResult[7]));
+    pitem->setItemDEF(atof(dbResult[8]));
+    pitem->setItemAGI(atof(dbResult[9]));
+    pitem->setItemLUK(atof(dbResult[10]));
+    pitem->setWeaponATKRate(atof(dbResult[11]));
+    pitem->setHPAbsorb(atof(dbResult[12]));
+    pitem->setCriRate(atof(dbResult[13]));
+    pitem->setCriDam(atof(dbResult[14]));
+    pitem->setComboRate(atof(dbResult[15]));
+    pitem->setEncounterRate(atof(dbResult[16]));
+    pitem->setSpeedRate(atof(dbResult[17]));
+    pitem->setLUKAddition(atof(dbResult[18]));
+    pitem->setItemDropAddition(atof(dbResult[19]));
+    pitem->setGoldDropAddition(atof(dbResult[20]));
+
     
     return 0;
 }
