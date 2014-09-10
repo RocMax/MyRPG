@@ -112,7 +112,6 @@ void UserData::RefreshUserData(){
     //生命值计算方法:点数*每点加的生命值+武器装备提供的生命值
     instance->setFinal_HP(instance->getHP()*instance->getHPPerPoint()+instance->equpmentsaddup(ItemData::eItemHP));
     //攻击力计算方法:(点数*每点加的攻击力+武器装备提供的攻击力)*武器提供的攻击倍率
-//    instance->setFinal_ATK((instance->getATK()*instance->getATKPerPoint()+instance->equpmentsaddup(ItemData::eItemATK))*(1+((ItemData*)instance->getEquipments()->objectForKey(0))->getWeaponATKRate()));
     instance->setFinal_ATK((instance->getATK()*instance->getATKPerPoint()+instance->equpmentsaddup(ItemData::eItemATK))*(1+instance->equpmentsaddup(ItemData::eWeaponATKRate)));
     //防御力计算方法:点数*每点加的防御力+装备提供的防御力
     instance->setFinal_DEF(instance->getDEF()*instance->getDEFPerPoint()+instance->equpmentsaddup(ItemData::eItemDEF));

@@ -251,7 +251,6 @@ void Gaming::btlayerExitObserver(){
     }
     
     //刷新userdata
-//    USER_DATA->LoadUserData();
     USER_DATA->RefreshUserData();
     refreshGameTimes();
     EncounterNum=(CCRANDOM_0_1()*100)*(1+USER_DATA->getFinal_EncounterRate());

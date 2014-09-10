@@ -57,17 +57,17 @@ void Equipment::setupViews(){
         ItemData* item=(ItemData*)pelement->getObject();
         CCLog("pic name:%s",item->getItemPic());
         CCSprite* sprite=CCSprite::create(item->getItemPic());
-        sprite->setAnchorPoint(ccp(0, 0));
-        sprite->setPosition(ccp(getWinsize().width/3+50, getWinsize().height-100-pelement->getIntKey()*50));
+        sprite->setAnchorPoint(ccp(0, 0.5));
+        sprite->setPosition(ccp(getWinsize().width/3+50, getWinsize().height-100-pelement->getIntKey()*80));
+        sprite->setScale(1.5);
+        equipmentsarray->addObject(sprite);
         this->addChild(sprite);
+        
+        CCLabelTTF* Itemlabel=CCLabelTTF::create(item->getItemName(), "Arial", 25);
+        Itemlabel->setAnchorPoint(ccp(0, 0.5));
+        Itemlabel->setPosition(ccp(sprite->getPositionX()+100, sprite->getPositionY()));
+        this->addChild(Itemlabel);
     }
     
-//    for (int i=0; i!=8; i++) {
-//        ItemData* item=(ItemData*)equipdic->objectForKey(i);
-//        CCSprite* sprite=CCSprite::create(item->getItemPic());
-//        sprite->setAnchorPoint(ccp(0, 0));
-//        sprite->setPosition(ccp(getWinsize().width/3+50, getWinsize().height-100-i*50));
-//        this->addChild(sprite);
-//        equipmentsarray->addObject(sprite);
-//    }
+
 }
