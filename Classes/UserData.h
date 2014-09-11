@@ -117,8 +117,8 @@ public:
     char* converstringtochar(string s);
     string convertchartostring(char* c);
     
-    static void convertchartodic(char* c,CCDictionary* d);
-    static void convertdictochar(CCDictionary* d,char* c);
+    static void convertchartodic(char* c,CCDictionary* d,bool isEquiping);
+    static void convertdictochar(CCDictionary* d,char* c,bool isEquiping);
     
 private:
     float equpmentsaddup(ItemData::enumStatu statuID);

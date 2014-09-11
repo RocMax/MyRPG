@@ -38,6 +38,8 @@ class ItemData:public CCObject{
     CC_SYNTHESIZE(float, GoldDropAddition, GoldDropAddition)
     CC_SYNTHESIZE(float, ExpRate, ExpRate);
     
+    CC_SYNTHESIZE(int, Itemcount, Itemcount);
+    
     //属性枚举
     enum enumStatu{eItemHP,eItemATK,eItemDEF,eItemAGI,eItemLUK,eWeaponATKRate,eHPAbsorb,eCriRate,eCriDam,eComboRate,eEncounterRate,eSpeedRate,eLUKAddition,eItemDropAddition,eGoldDropAddition,eExpRate};
     typedef float (ItemData::*pGet) () const;
