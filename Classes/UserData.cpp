@@ -48,15 +48,16 @@ void UserData::LoadUserData(){
     instance->setPositionX(USER_DEFAULT->getIntegerForKey("PositionX"));
     instance->setPositionY(USER_DEFAULT->getIntegerForKey("PositionY"));
     instance->setMapArea(USER_DEFAULT->getIntegerForKey("MapArea"));
-    CCDictionary* dictemp=CCDictionary::create();
-    convertchartodic(converstringtochar(USER_DEFAULT->getStringForKey("EquipBag")),dictemp,false);
-    instance->setEquipBag(dictemp);
+    CCDictionary* bagtemp=CCDictionary::create();
+    convertchartodic(converstringtochar(USER_DEFAULT->getStringForKey("EquipBag")),bagtemp,false);
+    instance->setEquipBag(bagtemp);
     EquipBag->retain();
-    dictemp->removeAllObjects();
-    convertchartodic(converstringtochar(USER_DEFAULT->getStringForKey("Equipments")),dictemp,true);
-    instance->setEquipments(dictemp);
+//    bagtemp->release();
+    CCDictionary* equiptemp=CCDictionary::create();
+    convertchartodic(converstringtochar(USER_DEFAULT->getStringForKey("Equipments")),equiptemp,true);
+    instance->setEquipments(equiptemp);
     Equipments->retain();
-    dictemp->release();
+//    equiptemp->release();
 }
 
 
@@ -94,9 +95,9 @@ void UserData::SaveUserData(){
         
         //存储装备和包裹的字符串
         char* temp;
-        convertdictochar(instance->getEquipBag(),temp,false);
+        convertdictochar(instance->getEquipBag(),temp);
         USER_DEFAULT->setStringForKey("EquipBag", temp);
-        convertdictochar(instance->getEquipments(),temp,true);
+        convertdictochar(instance->getEquipments(),temp);
         USER_DEFAULT->setStringForKey("Equipments", temp);
         
         USER_DEFAULT->flush();
@@ -169,7 +170,12 @@ void UserData::convertchartodic(char *c,CCDictionary* d,bool isEquiping){
             itemtemp=strsep(&temp, ";");
             int itemid=atoi(strsep(&itemtemp, ":")) ;
             ItemData* idata=ItemData::getItemData(itemid);
-            idata->setItemcount(atoi(itemtemp));
+            if (isEquiping) {
+                idata->setItemcount(1);
+            }
+            else{
+                idata->setItemcount(atoi(itemtemp));
+            }
             d->setObject(idata, i);
             i++;
         } while (temp!=NULL);
@@ -178,7 +184,7 @@ void UserData::convertchartodic(char *c,CCDictionary* d,bool isEquiping){
     
 }
 
-void UserData::convertdictochar(cocos2d::CCDictionary *d,char*c,bool isEquiping){
+void UserData::convertdictochar(cocos2d::CCDictionary *d,char*c){
     if (d!=NULL) {
         CCDictElement* pElement;
         CCString* str=CCString::createWithFormat("0");

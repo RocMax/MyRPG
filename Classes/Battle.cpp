@@ -194,14 +194,21 @@ void Battle::PlayerAttack(){
     mHP-=damage;
     CCLOG("player attack damage=%f monsterhp=%f",damage,mHP);
     
+    //player吸血
+    pHP+=damage*USER_DATA->getFinal_HPAbsorb();
+    if (pHP>USER_DATA->getFinal_HP()) {
+        pHP=USER_DATA->getFinal_HP();
+        
+    }
+    
     //monster掉血数字特效
     DamageNumber::shareddamagenumber()->getDanageEffect(monster, isCritical, damage);
     
     //修改Monster的HPbar
     mHPBar->setPercentage(mHP/mm->getM_HP()*100);
-
     
-    
+    //修改Player的HPbar(如果有吸血)
+    pHPBar->setPercentage(pHP/USER_DATA->getFinal_HP()*100);
     
 }
 void Battle::MonsterAttack(){

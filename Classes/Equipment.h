@@ -25,6 +25,11 @@ public:
 private:
     CCSize getWinsize();
     void setupViews();
+    virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
+    CCArray* equipmentsarray;
+    CCArray* bagarray;
+    void refreshbag(int itemtype);
+    void refreshequip();
 
 };
 
