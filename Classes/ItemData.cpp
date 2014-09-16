@@ -60,6 +60,8 @@ int ItemData::sqlite_callback(void *pv, int column, char **dbResult, char **col)
     pitem->setLUKAddition(atof(dbResult[18]));
     pitem->setItemDropAddition(atof(dbResult[19]));
     pitem->setGoldDropAddition(atof(dbResult[20]));
+    pitem->setExpRate(atof(dbResult[21]));
+    pitem->setIntroduction(strdup(dbResult[22]));
 
     
     return 0;

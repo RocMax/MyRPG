@@ -22,6 +22,7 @@ public:
     static CCScene* scene();
     CREATE_FUNC(Equipment);
     virtual void draw();
+    ~Equipment();
 private:
     CCSize getWinsize();
     void setupViews();
@@ -30,6 +31,15 @@ private:
     CCArray* bagarray;
     void refreshbag(int itemtype);
     void refreshequip();
+    CCLabelTTF* ItemIntro;
+    int equipflag;
+    int touchitemid;
+    void equipmenucallback(CCObject* pSender);
+    void okmenucallback(CCObject* pSender);
+    void changeequipment(int equipflag,int itemid);
+    void changebag(int itemid,bool isadd);
+
+
 
 };
 

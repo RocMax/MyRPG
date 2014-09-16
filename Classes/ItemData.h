@@ -37,6 +37,7 @@ class ItemData:public CCObject{
     CC_SYNTHESIZE(float, ItemDropAddition, ItemDropAddition);
     CC_SYNTHESIZE(float, GoldDropAddition, GoldDropAddition)
     CC_SYNTHESIZE(float, ExpRate, ExpRate);
+    CC_SYNTHESIZE(char*, Introduction, Introduction);
     
     CC_SYNTHESIZE(int, Itemcount, Itemcount);
     
