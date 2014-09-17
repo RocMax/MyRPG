@@ -23,12 +23,15 @@ public:
     CREATE_FUNC(Equipment);
     virtual void draw();
     ~Equipment();
+    //掉落时调用此函数
+    void changebag(int itemid,bool isadd);
 private:
     CCSize getWinsize();
     void setupViews();
     virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
     CCArray* equipmentsarray;
     CCArray* bagarray;
+    CCArray* equiplabelarray;
     void refreshbag(int itemtype);
     void refreshequip();
     CCLabelTTF* ItemIntro;
@@ -37,9 +40,7 @@ private:
     void equipmenucallback(CCObject* pSender);
     void okmenucallback(CCObject* pSender);
     void changeequipment(int equipflag,int itemid);
-    void changebag(int itemid,bool isadd);
-
-
+    bool isexistinginbag(int itemid);
 
 };
 

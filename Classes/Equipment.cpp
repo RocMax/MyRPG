@@ -30,6 +30,7 @@ bool Equipment::init(){
 Equipment::~Equipment(){
     equipmentsarray->release();
     bagarray->release();
+    equiplabelarray->release();
 }
 
 CCSize Equipment::getWinsize(){
@@ -60,6 +61,9 @@ void Equipment::setupViews(){
     bagarray=CCArray::create();
     equipmentsarray->retain();
     bagarray->retain();
+    equiplabelarray=CCArray::create();
+    equiplabelarray->retain();
+    
     
     //装备栏展示
     refreshequip();
@@ -160,6 +164,10 @@ void Equipment::refreshequip(){
             ((CCSprite*)pobject)->removeFromParent();
         }
         equipmentsarray->removeAllObjects();
+        CCARRAY_FOREACH_REVERSE(equiplabelarray,pobject){
+            ((CCSprite*)pobject)->removeFromParent();
+        }
+        equiplabelarray->removeAllObjects();
     }
     
     //添加装备栏展示
@@ -179,6 +187,7 @@ void Equipment::refreshequip(){
         Itemlabel->setAnchorPoint(ccp(0, 0.5));
         Itemlabel->setPosition(ccp(sprite->getPositionX()+100, sprite->getPositionY()));
         this->addChild(Itemlabel);
+        equiplabelarray->addObject(Itemlabel);
     }
 
 }
@@ -205,26 +214,28 @@ void Equipment::okmenucallback(cocos2d::CCObject *pSender){
 }
 
 void Equipment::changeequipment(int equipflag, int itemid){
+    if (isexistinginbag(itemid)) {
+        //取equipflag对应装备的信息
+        ItemData* item=(ItemData*)(USER_DATA->getEquipments()->objectForKey(equipflag));
+        //背包内对应equipflag的装备+1
+        changebag(item->getItemID(), true);
+        //背包内itemid的装备-1,判断是否为0
+        changebag(itemid, false);
+        //equipflag的装备设置为itemid
+        USER_DATA->getEquipments()->setObject(ItemData::getItemData(itemid), equipflag);
+        refreshequip();
+        switch (equipflag) {
+            case 0:
+                refreshbag(1);
+                break;
+            case 1:
+                refreshbag(2);
+                break;
+            default:
+                refreshbag(3);
+                break;
+        }
 
-    //取equipflag对应装备的信息
-    ItemData* item=(ItemData*)(USER_DATA->getEquipments()->objectForKey(equipflag));
-    //背包内对应equipflag的装备+1
-    changebag(item->getItemID(), true);
-    //背包内itemid的装备-1
-    changebag(itemid, false);
-    //equipflag的装备设置为itemid
-    USER_DATA->getEquipments()->setObject(ItemData::getItemData(itemid), equipflag);
-    refreshequip();
-    switch (equipflag) {
-        case 0:
-            refreshbag(1);
-            break;
-        case 1:
-            refreshbag(2);
-            break;
-        default:
-            refreshbag(3);
-            break;
     }
 }
 
@@ -258,6 +269,18 @@ void Equipment::changebag(int itemid, bool isadd){
                 }
             }
         }
-        
     }
+}
+
+bool Equipment::isexistinginbag(int itemid){
+    bool isexistinbag=false;
+    CCDictionary* bagdic=USER_DATA->getEquipBag();
+    CCDictElement* pelement;
+    CCDICT_FOREACH(bagdic, pelement){
+        ItemData* item=(ItemData*)(pelement->getObject());
+        if (item->getItemID()==itemid) {
+            isexistinbag=true;
+        }
+    }
+    return isexistinbag;
 }
