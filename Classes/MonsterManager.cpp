@@ -58,6 +58,9 @@ int MonsterManager::sqlite_callback(void *pv, int column, char **dbResult, char 
     m_instance->setM_Exp(atoi(dbResult[9]));
     m_instance->setM_Gold(atoi(dbResult[10]));
     
+    m_instance->setM_dropitemID(getDropItem(dbResult));
+    CCLOG("drop item id:%d",m_instance->getM_dropitemID());
+    
     return 0;     //callback一定要返回0!!!
     
 }
@@ -65,7 +68,19 @@ int MonsterManager::sqlite_callback(void *pv, int column, char **dbResult, char 
 
 
 
-//获取掉落,待完善
-//int MonsterManager::getDropItem(char **dbReasult){
-//    
-//}
+//获取掉落
+int MonsterManager::getDropItem(char **dbReasult){
+    float ratesum=0;
+    float radom=CCRANDOM_0_1();
+    for (int n=6; n!=16; n++) {
+        ratesum+=atof(dbReasult[2*n]);
+        if (radom<=ratesum) {
+            return atoi(dbReasult[2*n-1]);
+            break;
+        }
+        if (ratesum>=1) {
+            return 0;
+            break;
+        }
+    }
+}

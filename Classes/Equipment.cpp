@@ -28,9 +28,7 @@ bool Equipment::init(){
 }
 
 Equipment::~Equipment(){
-    equipmentsarray->release();
-    bagarray->release();
-    equiplabelarray->release();
+
 }
 
 CCSize Equipment::getWinsize(){
@@ -210,7 +208,9 @@ void Equipment::equipmenucallback(cocos2d::CCObject *pSender){
 }
 
 void Equipment::okmenucallback(cocos2d::CCObject *pSender){
-    
+    USER_DATA->RefreshUserData();
+    USER_DATA->SaveUserData();
+    CCDirector::sharedDirector()->popScene();
 }
 
 void Equipment::changeequipment(int equipflag, int itemid){
@@ -266,6 +266,7 @@ void Equipment::changebag(int itemid, bool isadd){
                 item->setItemcount(item->getItemcount()-1);
                 if (item->getItemcount()==0) {
                     bagdic->removeObjectForKey(pelement->getIntKey());
+                    ItemIntro->setString("");
                 }
             }
         }
@@ -283,4 +284,12 @@ bool Equipment::isexistinginbag(int itemid){
         }
     }
     return isexistinbag;
+}
+
+void Equipment::onExit(){
+    equipmentsarray->release();
+    bagarray->release();
+    equiplabelarray->release();
+    CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
+    CCLayer::onExit();
 }

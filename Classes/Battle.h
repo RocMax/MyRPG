@@ -73,7 +73,6 @@ private:
     
 //    void ExitNotify();
     
-
     
     void menucallback(CCObject* pSender);
     

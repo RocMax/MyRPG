@@ -12,6 +12,7 @@
 #include "DamageNumber.h"
 #include "LevelUpEffect.h"
 #include "Status.h"
+#include "Equipment.h"
 
 bool Battle::init(){
     bool sRect=false;
@@ -420,6 +421,37 @@ void Battle::EXPBarcallbackLv(cocos2d::CCNode *pSender){
     EXPnow+=EXPadd;
     EXPadd=0;
     USER_DATA->setEXP(EXPnow);
+    
+    //掉落展示
+    int itemid=mm->getM_dropitemID();
+    if (itemid!=0) {
+        CCLabelBMFont* dropitemlabel=CCLabelBMFont::create("DropItem:", "myfont1.fnt");
+        dropitemlabel->setPosition(ccp(80,blackbg->getContentSize().height/4*3-220));
+        ItemData* item=ItemData::getItemData(itemid);
+        CCSprite* sprite=CCSprite::create(item->getItemPic());
+        sprite ->setPosition(ccp(250,blackbg->getContentSize().height/4*3-220));
+        sprite->setScale(2.0);
+        blackbg->addChild(dropitemlabel);
+        blackbg->addChild(sprite);
+        
+        //向equipbag中添加装备
+        CCDictionary* bagdic=USER_DATA->getEquipBag();
+        CCDictElement* pelement;
+        bool isexistinbag=false;
+        CCDICT_FOREACH(bagdic, pelement){
+            ItemData* item=(ItemData*)(pelement->getObject());
+            if (item->getItemID()==itemid) {
+                item->setItemcount(item->getItemcount()+1);
+                isexistinbag=true;
+                }
+            }
+            if (isexistinbag==false) {
+                ItemData* item=ItemData::getItemData(itemid);
+                item->setItemcount(1);
+                bagdic->setObject(item, bagdic->count());
+            }
+    }
+    
     CCLabelBMFont* labelmap=CCLabelBMFont::create("MAP", "myfont1.fnt");
     CCLabelBMFont* labelstatus=CCLabelBMFont::create("STATUS", "myfont1.fnt");
     CCMenuItemLabel* clicktomap=CCMenuItemLabel::create(labelmap, this, menu_selector(Battle::menucallback));
@@ -456,3 +488,4 @@ const char* Battle::IntToChar(int num){
     CCString* csnum=CCString::createWithFormat("%d",num);
     return csnum->getCString();
 }
+

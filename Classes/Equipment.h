@@ -23,6 +23,7 @@ public:
     CREATE_FUNC(Equipment);
     virtual void draw();
     ~Equipment();
+    virtual void onExit();
     //掉落时调用此函数
     void changebag(int itemid,bool isadd);
 private:

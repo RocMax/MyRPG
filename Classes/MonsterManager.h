@@ -30,6 +30,8 @@ class MonsterManager:public CCObject{
     CC_SYNTHESIZE(float, M_CriticalDamage, M_CriticalDamage);
     CC_SYNTHESIZE(int, M_Exp, M_Exp);
     CC_SYNTHESIZE(int, M_Gold, M_Gold);
+    
+    CC_SYNTHESIZE(int, M_dropitemID, M_dropitemID);
 public:
     static MonsterManager* GetMonster(int MapArea);
     
@@ -40,6 +42,7 @@ private:
                         char** dbResult,    /* 指向查询结果的指针数组, 可以由 sqlite3_column_text() 得到 */
                         char** col        /* 指向表头名的指针数组, 可以由 sqlite3_column_name() 得到 */
     );
+    static int getDropItem(char **dbReasult);
 };
 
 

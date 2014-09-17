@@ -280,5 +280,6 @@ void Status::onExit(){
     buttomarray->release();
     this->unscheduleUpdate();
     CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
+    CCLayer::onExit();
     CCLOG("Status Layer Exit");
 }
