@@ -291,6 +291,7 @@
 		E8D8BB3F1995FA4C00C3E64A /* sub.png in Resources */ = {isa = PBXBuildFile; fileRef = E8D8BB3D1995FA4C00C3E64A /* sub.png */; };
 		E8DECEF619B7F98C0055934B /* ItemData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E8DECEF419B7F98C0055934B /* ItemData.cpp */; };
 		E8ED1EF81998997000CC6BFC /* Status.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E8ED1EF61998997000CC6BFC /* Status.cpp */; };
+		E8EE470A19C94E2D0021E1F2 /* Sword02.png in Resources */ = {isa = PBXBuildFile; fileRef = E8EE470919C94E2D0021E1F2 /* Sword02.png */; };
 		E8EEC090195BDC680089D564 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = E8EEC08E195BDC680089D564 /* menu.png */; };
 		E8EEC091195BDC680089D564 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = E8EEC08F195BDC680089D564 /* pause.png */; };
 		E8F395EB197AA0DA00D90836 /* Battle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E8F395E9197AA0DA00D90836 /* Battle.cpp */; };
@@ -856,6 +857,7 @@
 		E8DECEF519B7F98C0055934B /* ItemData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemData.h; path = ../Classes/ItemData.h; sourceTree = "<group>"; };
 		E8ED1EF61998997000CC6BFC /* Status.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Status.cpp; path = ../Classes/Status.cpp; sourceTree = "<group>"; };
 		E8ED1EF71998997000CC6BFC /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Status.h; path = ../Classes/Status.h; sourceTree = "<group>"; };
+		E8EE470919C94E2D0021E1F2 /* Sword02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sword02.png; sourceTree = "<group>"; };
 		E8EEC08E195BDC680089D564 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
 		E8EEC08F195BDC680089D564 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
 		E8F395E9197AA0DA00D90836 /* Battle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Battle.cpp; path = ../Classes/Battle.cpp; sourceTree = "<group>"; };
@@ -1846,6 +1848,7 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E8EE470919C94E2D0021E1F2 /* Sword02.png */,
 				E8B3A3EE19B0143600244A65 /* Accessory01.png */,
 				E8B3A3EF19B0143600244A65 /* Armor01.png */,
 				E8B3A3F019B0143600244A65 /* Empty.png */,
@@ -2062,6 +2065,7 @@
 				7855E0E1153FEF240059DD9A /* Default.png in Resources */,
 				E8741242198B7E540022BF5F /* HPbar.png in Resources */,
 				E8F39602197CEBFF00D90836 /* Monster5.png in Resources */,
+				E8EE470A19C94E2D0021E1F2 /* Sword02.png in Resources */,
 				E87E93FC1963C34A00E89661 /* meta_tiles.png in Resources */,
 				E8EEC091195BDC680089D564 /* pause.png in Resources */,
 				E8126ADB19610BF500FECCD0 /* hobit.png in Resources */,

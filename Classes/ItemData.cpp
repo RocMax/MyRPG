@@ -13,7 +13,7 @@
 
 ItemData* ItemData::getItemData(int ItemID){
     ItemData* item=new ItemData();
-    item->setItemID(ItemID);
+//    item->setItemID(ItemID);
 //    item->autorelease();
     //读入对应ItemID的数据
     char* errorMsg;
@@ -39,7 +39,7 @@ ItemData* ItemData::getItemData(int ItemID){
 
 int ItemData::sqlite_callback(void *pv, int column, char **dbResult, char **col){
     ItemData* pitem=(ItemData*)pv;
-    
+    pitem->setItemID(atoi(dbResult[0]));
     pitem->setItemName(strdup(dbResult[1]));
     pitem->setItemPic(strdup(dbResult[2]));
     pitem->setItemPrice(atoi(dbResult[3]));

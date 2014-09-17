@@ -205,14 +205,27 @@ void Equipment::okmenucallback(cocos2d::CCObject *pSender){
 }
 
 void Equipment::changeequipment(int equipflag, int itemid){
-    //背包内itemid的装备-1
-    changebag(itemid, false);
+
     //取equipflag对应装备的信息
     ItemData* item=(ItemData*)(USER_DATA->getEquipments()->objectForKey(equipflag));
     //背包内对应equipflag的装备+1
     changebag(item->getItemID(), true);
+    //背包内itemid的装备-1
+    changebag(itemid, false);
     //equipflag的装备设置为itemid
     USER_DATA->getEquipments()->setObject(ItemData::getItemData(itemid), equipflag);
+    refreshequip();
+    switch (equipflag) {
+        case 0:
+            refreshbag(1);
+            break;
+        case 1:
+            refreshbag(2);
+            break;
+        default:
+            refreshbag(3);
+            break;
+    }
 }
 
 //背包变更函数,isadd区分是加一件装备还是减一件装备至背包,加装备时判定是否已存在,存在则加数量,不存在则新建项.减装备时先减数量,减完为0的话删除此项.
@@ -222,19 +235,21 @@ void Equipment::changebag(int itemid, bool isadd){
     if (isadd) {
         bool isexistinbag=false;
         CCDICT_FOREACH(bagdic, pelement){
-            ItemData* item=(ItemData*)pelement;
+            ItemData* item=(ItemData*)(pelement->getObject());
             if (item->getItemID()==itemid) {
                 item->setItemcount(item->getItemcount()+1);
                 isexistinbag=true;
             }
         }
         if (isexistinbag==false) {
-            bagdic->setObject(ItemData::getItemData(itemid), bagdic->count());
+            ItemData* item=ItemData::getItemData(itemid);
+            item->setItemcount(1);
+            bagdic->setObject(item, bagdic->count());
         }
     }
     else {
         CCDICT_FOREACH(bagdic, pelement){
-            ItemData* item=(ItemData*)pelement;
+            ItemData* item=(ItemData*)(pelement->getObject());
             CCLOG("itemid:%d",item->getItemID());
             if (item->getItemID()==itemid) {
                 item->setItemcount(item->getItemcount()-1);
