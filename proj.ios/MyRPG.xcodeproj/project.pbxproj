@@ -289,6 +289,8 @@
 		E8B5B7FF19625CED00612BCC /* myfont1.png in Resources */ = {isa = PBXBuildFile; fileRef = E8B5B7FD19625CED00612BCC /* myfont1.png */; };
 		E8D8BB3E1995FA4C00C3E64A /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = E8D8BB3C1995FA4C00C3E64A /* add.png */; };
 		E8D8BB3F1995FA4C00C3E64A /* sub.png in Resources */ = {isa = PBXBuildFile; fileRef = E8D8BB3D1995FA4C00C3E64A /* sub.png */; };
+		E8DD32F519CA7D1F0059675D /* Equipbg.png in Resources */ = {isa = PBXBuildFile; fileRef = E8DD32F319CA7D1F0059675D /* Equipbg.png */; };
+		E8DD32F619CA7D1F0059675D /* Itembg.png in Resources */ = {isa = PBXBuildFile; fileRef = E8DD32F419CA7D1F0059675D /* Itembg.png */; };
 		E8DECEF619B7F98C0055934B /* ItemData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E8DECEF419B7F98C0055934B /* ItemData.cpp */; };
 		E8ED1EF81998997000CC6BFC /* Status.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E8ED1EF61998997000CC6BFC /* Status.cpp */; };
 		E8EE470A19C94E2D0021E1F2 /* Sword02.png in Resources */ = {isa = PBXBuildFile; fileRef = E8EE470919C94E2D0021E1F2 /* Sword02.png */; };
@@ -854,6 +856,8 @@
 		E8B5B7FD19625CED00612BCC /* myfont1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myfont1.png; sourceTree = "<group>"; };
 		E8D8BB3C1995FA4C00C3E64A /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		E8D8BB3D1995FA4C00C3E64A /* sub.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sub.png; sourceTree = "<group>"; };
+		E8DD32F319CA7D1F0059675D /* Equipbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Equipbg.png; sourceTree = "<group>"; };
+		E8DD32F419CA7D1F0059675D /* Itembg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Itembg.png; sourceTree = "<group>"; };
 		E8DECEF419B7F98C0055934B /* ItemData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ItemData.cpp; path = ../Classes/ItemData.cpp; sourceTree = "<group>"; };
 		E8DECEF519B7F98C0055934B /* ItemData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemData.h; path = ../Classes/ItemData.h; sourceTree = "<group>"; };
 		E8ED1EF61998997000CC6BFC /* Status.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Status.cpp; path = ../Classes/Status.cpp; sourceTree = "<group>"; };
@@ -1850,6 +1854,8 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E8DD32F319CA7D1F0059675D /* Equipbg.png */,
+				E8DD32F419CA7D1F0059675D /* Itembg.png */,
 				E8EE470D19C961F60021E1F2 /* Accessory02.png */,
 				E8EE470919C94E2D0021E1F2 /* Sword02.png */,
 				E8B3A3EE19B0143600244A65 /* Accessory01.png */,
@@ -2102,10 +2108,12 @@
 				E8126AD51960FE1000FECCD0 /* data.db in Resources */,
 				E88DD3EA1981FF36000F601F /* SimaQian.png in Resources */,
 				D446FD6E16102124000ADA7B /* Default@2x.png in Resources */,
+				E8DD32F619CA7D1F0059675D /* Itembg.png in Resources */,
 				E8B5B7EE196150E300612BCC /* manticore_gray.png in Resources */,
 				E8126ADF19610C9C00FECCD0 /* spector.png in Resources */,
 				15A3D9961682F7F9002FB0C5 /* CMakeLists.txt in Resources */,
 				E8D8BB3F1995FA4C00C3E64A /* sub.png in Resources */,
+				E8DD32F519CA7D1F0059675D /* Equipbg.png in Resources */,
 				E8EEC090195BDC680089D564 /* menu.png in Resources */,
 				E8126ADA19610BF500FECCD0 /* cyclops.png in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,

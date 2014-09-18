@@ -42,6 +42,8 @@ private:
     void okmenucallback(CCObject* pSender);
     void changeequipment(int equipflag,int itemid);
     bool isexistinginbag(int itemid);
+    CCSprite* equipbg;
+    CCSprite* itembg;
 
 };
 

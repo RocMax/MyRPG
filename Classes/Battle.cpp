@@ -12,7 +12,6 @@
 #include "DamageNumber.h"
 #include "LevelUpEffect.h"
 #include "Status.h"
-#include "Equipment.h"
 
 bool Battle::init(){
     bool sRect=false;

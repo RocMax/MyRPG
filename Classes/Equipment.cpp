@@ -98,6 +98,20 @@ bool Equipment::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent)
         if (equipsprite->boundingBox().containsPoint(pTouch->getLocation())) {
             equipflag=equipsprite->getTag();
             CCLOG("equipflag:%d",equipflag);
+            
+            //添加点击背景
+            if (equipbg==NULL) {
+                equipbg=CCSprite::create("Equipbg.png");
+                equipbg->setAnchorPoint(ccp(0,0.5));
+                equipbg->setPosition(equipsprite->getPosition());
+                equipbg->setScale(2.0);
+                this->addChild(equipbg, 5);
+            }
+            else{
+                CCAction* moveequipbg=CCMoveTo::create(0.2, equipsprite->getPosition());
+                equipbg->runAction(moveequipbg);
+            }
+            
             switch (equipflag) {
                 case 0:
                     refreshbag(1);
@@ -118,6 +132,20 @@ bool Equipment::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent)
             ItemIntro->setString(ItemData::getItemData(bagsprite->getTag()-100)->getIntroduction());
             touchitemid=bagsprite->getTag()-100;
             CCLOG("touchitemid:%d",touchitemid);
+            
+            //添加点击背景
+            if (this->getChildByTag(200)==NULL) {
+                itembg=CCSprite::create("Itembg.png");
+                itembg->setAnchorPoint(ccp(0,0));
+                itembg->setPosition(bagsprite->getPosition());
+                itembg->setScale(3.0);
+                this->addChild(itembg, 5,200);
+            }
+            else {
+                CCAction* moveitembg=CCMoveTo::create(0.2, bagsprite->getPosition());
+                itembg->runAction(moveitembg);
+
+            }
         }
     }
     return true;
@@ -131,6 +159,7 @@ void Equipment::refreshbag(int itemtype){
         ((CCSprite*)pobject)->removeFromParent();
     }
     bagarray->removeAllObjects();
+    this->removeChildByTag(200);
     //按照装备类别填充bagarray
     CCDictElement* pelement;
     CCDictionary* bagdic=USER_DATA->getEquipBag();
@@ -179,12 +208,12 @@ void Equipment::refreshequip(){
         sprite->setPosition(ccp(getWinsize().width/3+50, getWinsize().height-100-pelement->getIntKey()*60));
         sprite->setScale(2.0);
         equipmentsarray->addObject(sprite);
-        this->addChild(sprite, 1, pelement->getIntKey());
+        this->addChild(sprite, 10, pelement->getIntKey());
         CCLOG("sprite tag:%d",sprite->getTag());
         CCLabelTTF* Itemlabel=CCLabelTTF::create(item->getItemName(), "Arial", 25);
         Itemlabel->setAnchorPoint(ccp(0, 0.5));
         Itemlabel->setPosition(ccp(sprite->getPositionX()+100, sprite->getPositionY()));
-        this->addChild(Itemlabel);
+        this->addChild(Itemlabel,10);
         equiplabelarray->addObject(Itemlabel);
     }
 
