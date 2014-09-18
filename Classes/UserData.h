@@ -38,7 +38,7 @@
 
 #define COMBO_RATIO_a 3000
 #define COMBO_RATIO_k -4770
-#define COMBO_RATIO_b 1.95
+#define COMBO_RATIO_b 1.59
 
 using namespace std;
 USING_NS_CC;

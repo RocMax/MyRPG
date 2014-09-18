@@ -159,7 +159,7 @@ void Equipment::refreshbag(int itemtype){
         ((CCSprite*)pobject)->removeFromParent();
     }
     bagarray->removeAllObjects();
-    this->removeChildByTag(200);
+    
     //按照装备类别填充bagarray
     CCDictElement* pelement;
     CCDictionary* bagdic=USER_DATA->getEquipBag();
@@ -181,6 +181,11 @@ void Equipment::refreshbag(int itemtype){
             i++;
         }
     }
+//    if ((bagarray->count()==0)&&(this->getChildByTag(200)!=NULL)) {
+//        this->removeChildByTag(200);
+//    }
+    this->removeChildByTag(200);
+    touchitemid=0;
 }
 
 void Equipment::refreshequip(){
@@ -243,26 +248,28 @@ void Equipment::okmenucallback(cocos2d::CCObject *pSender){
 }
 
 void Equipment::changeequipment(int equipflag, int itemid){
-    if (isexistinginbag(itemid)) {
-        //取equipflag对应装备的信息
-        ItemData* item=(ItemData*)(USER_DATA->getEquipments()->objectForKey(equipflag));
-        //背包内对应equipflag的装备+1
-        changebag(item->getItemID(), true);
-        //背包内itemid的装备-1,判断是否为0
-        changebag(itemid, false);
-        //equipflag的装备设置为itemid
-        USER_DATA->getEquipments()->setObject(ItemData::getItemData(itemid), equipflag);
-        refreshequip();
-        switch (equipflag) {
-            case 0:
-                refreshbag(1);
-                break;
-            case 1:
-                refreshbag(2);
-                break;
-            default:
-                refreshbag(3);
-                break;
+    if (itemid!=0) {
+        if (isexistinginbag(itemid)) {
+            //取equipflag对应装备的信息
+            ItemData* item=(ItemData*)(USER_DATA->getEquipments()->objectForKey(equipflag));
+            //背包内对应equipflag的装备+1
+            changebag(item->getItemID(), true);
+            //背包内itemid的装备-1,判断是否为0
+            changebag(itemid, false);
+            //equipflag的装备设置为itemid
+            USER_DATA->getEquipments()->setObject(ItemData::getItemData(itemid), equipflag);
+            refreshequip();
+            switch (equipflag) {
+                case 0:
+                    refreshbag(1);
+                    break;
+                case 1:
+                    refreshbag(2);
+                    break;
+                default:
+                    refreshbag(3);
+                    break;
+            }
         }
 
     }
@@ -285,6 +292,7 @@ void Equipment::changebag(int itemid, bool isadd){
             ItemData* item=ItemData::getItemData(itemid);
             item->setItemcount(1);
             bagdic->setObject(item, bagdic->count());
+            
         }
     }
     else {
@@ -296,6 +304,8 @@ void Equipment::changebag(int itemid, bool isadd){
                 if (item->getItemcount()==0) {
                     bagdic->removeObjectForKey(pelement->getIntKey());
                     ItemIntro->setString("");
+                    //移除选择框
+                    this->removeChildByTag(200);
                 }
             }
         }
