@@ -186,6 +186,7 @@ void Equipment::refreshbag(int itemtype){
 //    }
     this->removeChildByTag(200);
     touchitemid=0;
+    ItemIntro->setString("");
 }
 
 void Equipment::refreshequip(){
