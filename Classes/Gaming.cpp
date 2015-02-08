@@ -49,7 +49,7 @@ void Gaming::SetupViews(){
     metaLayer->setVisible(false);
     //获取level层
     levelLayer=tiledMap->layerNamed("Level");
-    levelLayer->setVisible(true);
+    levelLayer->setVisible(false);
     //注册触摸
     CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 10, true);
     //控制移动的schedule
