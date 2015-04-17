@@ -4,6 +4,7 @@ MyRPG
 A RPG Project for cocos2d-x Studying
 
 实现的主要功能:
+
 1.选择角色,不同角色有不同的初始属性及成长方向
 
 2.随机遇怪和自动战斗,有连击和暴击等判定
