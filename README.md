@@ -14,3 +14,12 @@ A RPG Project for cocos2d-x Studying
 4.角色的升级和加点
 
 5.角色换装
+
+游戏截图:
+![image](https://github.com/RocMax/MyRPG/tree/master/ScreenShots/characters.png)
+![image](https://github.com/RocMax/MyRPG/tree/master/ScreenShots/map.png)
+![image](https://github.com/RocMax/MyRPG/tree/master/ScreenShots/fight01.png)
+![image](https://github.com/RocMax/MyRPG/tree/master/ScreenShots/fight02.png)
+![image](https://github.com/RocMax/MyRPG/tree/master/ScreenShots/fight03.png)
+![image](https://github.com/RocMax/MyRPG/tree/master/ScreenShots/status.png)
+![image](https://github.com/RocMax/MyRPG/tree/master/ScreenShots/equipments.png)
