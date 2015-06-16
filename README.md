@@ -8,6 +8,7 @@ A RPG Project for cocos2d-x Studying
 * 角色的升级和加点
 * 角色换装
 
+
 游戏截图:
 ![](https://github.com/RocMax/MyRPG/raw/master/ScreenShots/characters.png?raw=true)
 ![](https://github.com/RocMax/MyRPG/raw/master/ScreenShots/map.png)
